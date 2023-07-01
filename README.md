@@ -16,3 +16,9 @@
 # create network for sqrx
 docker network create sqrx-network
 ```
+
+## sqrx-api-server
+
+- /try endpoint to spin up a new container
+- /status endpoint to check status of a container (running or not)
+- /stop endpoint to stop a container
