@@ -25,12 +25,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	log.Println("host info:", hostInfo)
 
 	res := map[string]interface{}{
-		"host":      r.Host,
-		"host_info": hostInfo,
 		"data": map[string]interface{}{
-			"hostname":     "12",
-			"container_id": "123",
-			"message":      "you're in safe zone with rbi",
+			"host":      r.Host,
+			"host_info": hostInfo,
+			"message":   "you're in safe zone with rbi",
 		},
 		"meta": map[string]interface{}{
 			"status":      "ok",

@@ -28,7 +28,7 @@ ENV LC_ALL C.UTF-8
 # ENV PORT 80
 # ENV RBI_CONFIG_PATH "/root/.rbi/config.yaml"
 
-EXPOSE 8080
+EXPOSE 8888
 
 RUN ls
 
