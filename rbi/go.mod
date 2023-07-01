@@ -2,7 +2,11 @@ module sqrx/rbi
 
 go 1.18
 
-require github.com/shirou/gopsutil/v3 v3.23.6
+require (
+	github.com/go-chi/chi/v5 v5.0.8
+	github.com/gorilla/websocket v1.5.0
+	github.com/shirou/gopsutil/v3 v3.23.6
+)
 
 require (
 	github.com/go-ole/go-ole v1.2.6 // indirect
