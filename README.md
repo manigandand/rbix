@@ -1,5 +1,21 @@
 # squarex
 
+Container Isolations- Websocket reverse proxy - Remote Browser Isolations
+
+---
+
+![squarex](sqrx-archi.png)
+
+---
+
+> Demo video
+
+### How to run
+
+```bash
+./run.sh
+```
+
 ### Remote Browser Isolation
 
 - Pixel pushing/streaming
