@@ -2,6 +2,19 @@
 
 API Server - responsible for managing the containers and provisioning new sqrx-rbi containers.
 
+```bash
+# build the docker image
+CGO_ENABLED=0 GOOS=linux go build -o sqrx-api -ldflags "-w -s"
+
+docker build -t manigandanjeff/sqrx-api:latest .
+
+docker run -d -p 8080:8080 \
+    --network sqrx-network \
+    --name sqrx-api-1 \
+    --hostname sqrx-api \
+    manigandanjeff/sqrx-api:latest
+```
+
 - POST /try -> endpoint to spin up a new container
 
 ```json

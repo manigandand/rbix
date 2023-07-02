@@ -155,7 +155,12 @@ func deleteContainer(cInfo *ContainerInfo) *errors.AppError {
 	}
 	defer cli.Close()
 
-	if err := cli.ContainerRemove(ctx, cInfo.Container.ID, types.ContainerRemoveOptions{}); err != nil {
+	// stop container, ingore error since we try force remove
+	cli.ContainerStop(ctx, cInfo.Container.ID, container.StopOptions{})
+
+	if err := cli.ContainerRemove(ctx, cInfo.Container.ID, types.ContainerRemoveOptions{
+		Force: true,
+	}); err != nil {
 		return errors.InternalServer("could not remove container: " + err.Error())
 	}
 
