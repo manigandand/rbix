@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -27,9 +28,36 @@ var (
 	defaultDialer = websocket.DefaultDialer
 )
 
+func getContainerInfo(cintainerID string) (time.Time, error) {
+	now := time.Now()
+	url := fmt.Sprintf("%s/v1/status/%s", SqrxAPIServer, cintainerID)
+	resp, err := http.Get(url)
+	if err != nil {
+		return now, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return now, fmt.Errorf("invalid container id")
+	}
+
+	res := map[string]time.Time{}
+	if err := json.NewDecoder(resp.Body).Decode(&resp); err != nil {
+		return now, err
+	}
+
+	return res["valid_till"], nil
+}
+
 func angagoServer(w http.ResponseWriter, r *http.Request) {
 	containerID := chi.URLParam(r, "container_id")
-	// TODO: check if the container id valid or not from sqrx-api
+	// check if the container id valid or not from sqrx-api
+	validTill, err := getContainerInfo(containerID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	log.Println("session valid till:", validTill)
 
 	targetURL := fmt.Sprintf("ws://%s:%s/%s/ws", "localhost", SqrxRBIBoxPort, containerID)
 	remote, _ := url.Parse(targetURL)
