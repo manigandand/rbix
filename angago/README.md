@@ -11,8 +11,8 @@ docker build -t manigandanjeff/sqrx-angago:latest .
 
 docker run -d -p 8081:8081 \
     --network sqrx-network \
-    --name box-sqrx-angago \
-    --hostname box-sqrx-angago-1 \
+    --name box-sqrx-angago-1 \
+    --hostname box-sqrx-angago \
     manigandanjeff/sqrx-angago:latest
 
 ```

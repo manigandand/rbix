@@ -28,4 +28,12 @@ docker run -d -p 8080:8080 \
 ```
 
 - /status/{container_id} -> endpoint to check status of a container (running or not)
+
+```json
+{
+	"error": "container not found",
+	"status": 404
+}
+```
+
 - /stop/{container_id} -> endpoint to stop a container

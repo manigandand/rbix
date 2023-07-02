@@ -8,5 +8,5 @@ const (
 	SqrxRBIBoxPort = "8888"
 
 	// SqrxAPIServer is the server name of the SqrxRBIBox container
-	SqrxAPIServer = "http://sqrx-api:8080"
+	SqrxAPIServer = "http://localhost:8080"
 )
