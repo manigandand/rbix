@@ -11,6 +11,7 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 	"github.com/manigandand/adk/errors"
 	"github.com/manigandand/adk/respond"
@@ -111,16 +112,52 @@ func newSqureXSessionHandler(w http.ResponseWriter, r *http.Request) *errors.App
 	db.SaveTerminationTokenInfo(containerInfo.TerminationToken, containerUniqeID)
 
 	// spinup background process to delete the container after 10 minutes
+	go func() {
+		<-time.After(10 * time.Minute)
+		if err := deleteContainer(containerInfo); err.NotNil() {
+			log.Println("could not delete container: ", err.Error())
+		}
+	}()
 
 	return respond.OK(w, containerInfo)
 }
 
 func getContainerStatHandler(w http.ResponseWriter, r *http.Request) *errors.AppError {
-	// ctx := r.Context()
-	return respond.OK(w, nil)
+	containerID := chi.URLParam(r, "container_id")
+
+	cInfo, err := db.GetContainerInfo(containerID)
+	if err.NotNil() {
+		return err
+	}
+
+	return respond.OK(w, cInfo)
 }
 
 func stopContainerHandler(w http.ResponseWriter, r *http.Request) *errors.AppError {
-	// ctx := r.Context()
-	return respond.OK(w, nil)
+	token := chi.URLParam(r, "termination_token")
+	cInfo, err := db.GetContainerInfoByTermToken(token)
+	if err.NotNil() {
+		return err
+	}
+
+	if err := deleteContainer(cInfo); err.NotNil() {
+		return err
+	}
+
+	return respond.OK(w, respond.Msg("container deleted"))
+}
+
+func deleteContainer(cInfo *ContainerInfo) *errors.AppError {
+	ctx := context.Background()
+	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	if err != nil {
+		return errors.InternalServer("could not create docker client: " + err.Error())
+	}
+	defer cli.Close()
+
+	if err := cli.ContainerRemove(ctx, cInfo.Container.ID, types.ContainerRemoveOptions{}); err != nil {
+		return errors.InternalServer("could not remove container: " + err.Error())
+	}
+
+	return nil
 }

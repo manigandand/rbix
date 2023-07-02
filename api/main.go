@@ -44,8 +44,8 @@ func main() {
 	// routes
 	router.Route("/v1", func(r chi.Router) {
 		r.Method(http.MethodPost, "/try", api.Handler(newSqureXSessionHandler))
-		r.Method(http.MethodPost, "/login", api.Handler(getContainerStatHandler))
-		r.Method(http.MethodPost, "/logout", api.Handler(stopContainerHandler))
+		r.Method(http.MethodGet, "/status/{container_id}", api.Handler(getContainerStatHandler))
+		r.Method(http.MethodPost, "/stop/{termination_token}", api.Handler(stopContainerHandler))
 	})
 
 	server := http.Server{
