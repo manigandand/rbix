@@ -9,6 +9,10 @@ CGO_ENABLED=0 GOOS=linux go build -o sqrx-angago -ldflags "-w -s"
 
 docker build -t sqrx/angago:latest .
 
-docker run -d -p 8081:8081 --network sqrx-network --name box-sqrx-angago --hostname box-sqrx-angago-1 sqrx/angago:latest
+docker run -d -p 8081:8081 \
+    --network sqrx-network \
+    --name box-sqrx-angago \
+    --hostname box-sqrx-angago-1 \
+    sqrx/angago:latest
 
 ```
