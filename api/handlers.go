@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/docker/docker/api/types"
@@ -26,6 +27,7 @@ func init() {
 	db = &Store{
 		containers:       make(map[string]*ContainerInfo),
 		terminationToken: make(map[string]string),
+		mx:               sync.RWMutex{},
 	}
 
 	ctx := context.Background()
@@ -105,8 +107,10 @@ func newSqureXSessionHandler(w http.ResponseWriter, r *http.Request) *errors.App
 	containerInfo.TerminationToken = uuid.New().String()
 
 	// save to db
-	db.containers[containerUniqeID] = containerInfo
-	db.terminationToken[containerInfo.TerminationToken] = containerUniqeID
+	db.SaveContainerInfo(containerUniqeID, containerInfo)
+	db.SaveTerminationTokenInfo(containerInfo.TerminationToken, containerUniqeID)
+
+	// spinup background process to delete the container after 10 minutes
 
 	return respond.OK(w, containerInfo)
 }
