@@ -30,6 +30,4 @@ ENV LC_ALL C.UTF-8
 
 EXPOSE 8888
 
-RUN ls
-
 CMD ["/app/sqrx-rbi"]
