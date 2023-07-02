@@ -17,8 +17,6 @@ import (
 )
 
 func main() {
-	Port := "8080"
-
 	router := chi.NewRouter()
 
 	cors := cors.New(cors.Options{
@@ -45,9 +43,9 @@ func main() {
 
 	// routes
 	router.Route("/v1", func(r chi.Router) {
-		router.Method(http.MethodPost, "/try", api.Handler(newSqureXSessionHandler))
-		router.Method(http.MethodPost, "/login", api.Handler(getContainerStatHandler))
-		router.Method(http.MethodPost, "/logout", api.Handler(stopContainerHandler))
+		r.Method(http.MethodPost, "/try", api.Handler(newSqureXSessionHandler))
+		r.Method(http.MethodPost, "/login", api.Handler(getContainerStatHandler))
+		r.Method(http.MethodPost, "/logout", api.Handler(stopContainerHandler))
 	})
 
 	server := http.Server{
@@ -72,7 +70,7 @@ func main() {
 		os.Exit(1)
 	}()
 
-	log.Println("angago (reverseproxy) listening on ", Port)
+	log.Println("Sqrx-api-server listening on ", Port)
 	if err := http.ListenAndServe(fmt.Sprintf(":%s", Port), router); err != nil {
 		log.Fatal(err.Error())
 	}
