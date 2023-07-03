@@ -4,7 +4,7 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 
 ---
 
-![squarex](sqrx-archi.png)
+![squarex](/sqrx-archi.png)
 
 ---
 
