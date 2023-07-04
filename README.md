@@ -4,21 +4,34 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 
 ---
 
-![squarex](https://private-user-images.githubusercontent.com/9547223/250960270-0cc3ad6f-e429-49fe-8bc8-38292f4296cb.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJrZXkxIiwiZXhwIjoxNjg4NDkwNDczLCJuYmYiOjE2ODg0OTAxNzMsInBhdGgiOiIvOTU0NzIyMy8yNTA5NjAyNzAtMGNjM2FkNmYtZTQyOS00OWZlLThiYzgtMzgyOTJmNDI5NmNiLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzA3MDQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMwNzA0VDE3MDI1M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMyMjc4YjRmZTE2ZjFkNTE5MDRjYzA5MDRlNTEyOGMxYzI2MjcyZTdmNGI0M2I4OGE2ZDNmMjFjNzZhZWQ1NzkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.HcghCskK6B-MkIDJF0r2U9tm64BWxm5y8rYJR_VJ9Kk)
+![squarex](https://github.com/manigandand/sqrx/assets/9547223/0cc3ad6f-e429-49fe-8bc8-38292f4296cb)
 
 ---
 
 > Demo video
 
-### How to run
+### How to run: via k8s minikube
 
 ```bash
+# pre-requisite - install minikube
+# curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+# sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+# minikube start
+
+./run_k8s_minikube.sh
+```
+
+### How to run: via docker containers
+
+```bash
+- Will create a docker network `sqrx-network`
+
 ./run.sh
+
 ```
 
 ---
-
-- Will create a docker network `sqrx-network`
 
 ### sqrx-api-server
 

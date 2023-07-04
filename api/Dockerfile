@@ -25,4 +25,4 @@ ENV LC_ALL C.UTF-8
 
 EXPOSE 8080
 
-CMD ["/app/sqrx-api"]
+CMD /app/sqrx-api /config/config.api.json

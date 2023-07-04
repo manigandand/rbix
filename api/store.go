@@ -21,6 +21,16 @@ type ContainerInfo struct {
 
 var db *Store
 
+// InitStore - init store
+func InitStore() {
+	// init db
+	db = &Store{
+		containers:       make(map[string]*ContainerInfo),
+		terminationToken: make(map[string]string),
+		mx:               sync.RWMutex{},
+	}
+}
+
 // Store - local kv store
 type Store struct {
 	containers       map[string]*ContainerInfo

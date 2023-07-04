@@ -17,6 +17,21 @@ import (
 )
 
 func main() {
+	if len(os.Args) < 2 {
+		log.Fatal("Wrong length of arguments")
+	}
+
+	// initialize config
+	Initialize(os.Args[1:]...)
+
+	api.InitService("sqrx-api", "v1.0.0")
+
+	InitStore()
+
+	if Env == EnvLoclDocker {
+		initDockerSqrxNetwork()
+	}
+
 	router := chi.NewRouter()
 
 	cors := cors.New(cors.Options{
@@ -40,6 +55,8 @@ func main() {
 		middleware.Logger,
 		middleware.Recoverer,
 	)
+	router.Get("/", api.IndexHandeler)
+	router.Get("/health", api.HealthHandeler)
 
 	// routes
 	router.Route("/v1", func(r chi.Router) {

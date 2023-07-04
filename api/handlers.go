@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"sync"
 	"time"
 
 	"github.com/docker/docker/api/types"
@@ -16,49 +15,6 @@ import (
 	"github.com/manigandand/adk/errors"
 	"github.com/manigandand/adk/respond"
 )
-
-var (
-	// Sqrx cluster network bridge
-	// we expect that the network is already created
-	sqrxNetwork types.NetworkResource
-)
-
-func init() {
-	// init db
-	db = &Store{
-		containers:       make(map[string]*ContainerInfo),
-		terminationToken: make(map[string]string),
-		mx:               sync.RWMutex{},
-	}
-
-	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
-	if err != nil {
-		panic(err)
-	}
-	defer cli.Close()
-
-	netw, err := cli.NetworkList(ctx, types.NetworkListOptions{})
-	if err != nil {
-		panic("could not get network list: " + err.Error())
-	}
-	if len(netw) == 0 {
-		panic("no network found")
-	}
-
-	found := false
-	for _, n := range netw {
-		if n.Name == "sqrx-network" {
-			sqrxNetwork = n
-			found = true
-			break
-		}
-	}
-
-	if !found {
-		panic("sqrx-network not found")
-	}
-}
 
 // creates a new sqrx-rbi container. we assume that the `image` is already pulled
 func newSqureXSessionHandler(w http.ResponseWriter, r *http.Request) *errors.AppError {

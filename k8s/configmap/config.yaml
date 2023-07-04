@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: sqrx-config
+    namespace: platform
+data:
+    config.api.json: |
+        {
+          "ENV": "dev-k8s",
+          "SQRX_WS_LOADBALANCER_HOST" : "http://localhost:8081"
+        }
+    config.angago.json: |
+        {
+          "ENV": "dev-k8s",
+          "SQRX_WS_LOADBALANCER_HOST" : "http://localhost:8081"
+        }
+    config.rbi.json: |
+        {
+          "ENV": "dev-k8s",
+          "SQRX_WS_LOADBALANCER_HOST" : "http://localhost:8081"
+        }
