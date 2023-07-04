@@ -164,5 +164,7 @@ func deleteContainer(cInfo *ContainerInfo) *errors.AppError {
 		return errors.InternalServer("could not remove container: " + err.Error())
 	}
 
+	db.DeleteContainer(cInfo.ContainerID)
+
 	return nil
 }
