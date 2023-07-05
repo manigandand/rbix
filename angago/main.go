@@ -16,6 +16,13 @@ import (
 )
 
 func main() {
+	if len(os.Args) < 2 {
+		log.Fatal("Wrong length of arguments")
+	}
+
+	// initialize config
+	Initialize(os.Args[1:]...)
+
 	router := chi.NewRouter()
 
 	cors := cors.New(cors.Options{

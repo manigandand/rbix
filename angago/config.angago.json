@@ -1,0 +1,6 @@
+{
+	"ENV": "dev-docker",
+	"PORT": "8081",
+	"SQRX_RBI_BOX_PORT": "8888",
+	"SQRX_API_SERVER_HOST": "http://localhost:8080"
+}

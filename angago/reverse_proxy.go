@@ -51,16 +51,22 @@ func getContainerInfo(cintainerID string) (time.Time, error) {
 
 func angagoServer(w http.ResponseWriter, r *http.Request) {
 	containerID := chi.URLParam(r, "container_id")
-	// check if the container id valid or not from sqrx-api
-	// validTill, err := getContainerInfo(containerID)
-	// if err != nil {
-	// 	log.Println("invalid container id:", err)
-	// 	http.Error(w, err.Error(), http.StatusBadRequest)
-	// 	return
-	// }
-	// log.Println("session valid till:", validTill)
-
 	targetURL := fmt.Sprintf("ws://%s:%s/%s/ws", containerID, SqrxRBIBoxPort, containerID)
+
+	// check if the container id valid or not from sqrx-api
+	if Env == EnvLocalK8s {
+		validTill, err := getContainerInfo(containerID)
+		if err != nil {
+			log.Println("invalid container id:", err)
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		log.Println("session valid till:", validTill)
+
+		targetURL = fmt.Sprintf("ws://sqrx-rbi.%s.svc.cluster.local:%s/%s/ws",
+			containerID, SqrxRBIBoxPort, containerID)
+	}
+
 	remote, _ := url.Parse(targetURL)
 
 	log.Printf("Proxying the Host %s to %s\n", r.Host, targetURL)

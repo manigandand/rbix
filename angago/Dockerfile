@@ -25,4 +25,4 @@ ENV LC_ALL C.UTF-8
 
 EXPOSE 8081
 
-CMD ["/app/sqrx-angago"]
+CMD /app/sqrx-angago /config/config.angago.json
