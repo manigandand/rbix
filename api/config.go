@@ -33,11 +33,12 @@ var (
 // This function should be called only once!
 //
 // Example:
-//     LoadFromJSON("config.json", "dash.json")
-//     addNewEnvEntry("HOST", "localhost", &host)
-//     addNewEnvEntry("PORT", "8080", &port)
-//     ...
-//     load()
+//
+//	LoadFromJSON("config.json", "dash.json")
+//	addNewEnvEntry("HOST", "localhost", &host)
+//	addNewEnvEntry("PORT", "8080", &port)
+//	...
+//	load()
 func Initialize(files ...string) {
 	if initDone {
 		panic("config initialization done already")
@@ -89,9 +90,10 @@ type runtimeValue struct {
 var envVars = make(map[string]runtimeValue)
 
 // addNewEnvEntry is used to add a new env entry into the Vars map
-//   envKey     - What key this variable is defined as in env
-//   varPtr     - Pointer to the variable which will holds the value
-//   defaultVal - What should be the default value if it is not defined
+//
+//	envKey     - What key this variable is defined as in env
+//	varPtr     - Pointer to the variable which will holds the value
+//	defaultVal - What should be the default value if it is not defined
 func addNewEnvEntry(envkey string, varPtr *string, defaultVal string) {
 	if initDone {
 		panic("Initialization done already")
@@ -103,7 +105,6 @@ func addNewEnvEntry(envkey string, varPtr *string, defaultVal string) {
 }
 
 // Load initializes all the variables for this package.
-//
 //
 // This function reads/loads the environment variables and sets the values
 // to the variables from the environment and/or configMaps.

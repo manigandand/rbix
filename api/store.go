@@ -6,12 +6,14 @@ import (
 
 	"github.com/docker/docker/api/types/container"
 	"github.com/manigandand/adk/errors"
+	appsv1 "k8s.io/api/apps/v1"
 )
 
 // ContainerInfo is the container information
 type ContainerInfo struct {
 	ContainerID      string                   `json:"-"`
-	Container        container.CreateResponse `json:"-"`
+	DocContainer     container.CreateResponse `json:"-"`
+	K8sContainer     *appsv1.Deployment       `json:"-"`
 	Session          string                   `json:"session"`
 	TerminationToken string                   `json:"termination_token"`
 	CreatedAt        time.Time                `json:"created_at"`

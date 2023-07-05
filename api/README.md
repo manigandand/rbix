@@ -7,6 +7,8 @@ API Server - responsible for managing the containers and provisioning new sqrx-r
 CGO_ENABLED=0 GOOS=linux go build -o sqrx-api -ldflags "-w -s"
 
 docker build -t manigandanjeff/sqrx-api:latest .
+docker push manigandanjeff/sqrx-api:latest
+# ---------------------------------------------
 
 docker run -d -p 8080:8080 \
     --network sqrx-network \

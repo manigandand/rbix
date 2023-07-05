@@ -13,6 +13,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/manigandand/adk/api"
+	appmiddleware "github.com/manigandand/adk/middleware"
 	"github.com/rs/cors"
 )
 
@@ -50,7 +51,7 @@ func main() {
 	router.Use(cors.Handler)
 	router.Use(
 		middleware.Logger,
-		middleware.Recoverer,
+		appmiddleware.Recoverer,
 	)
 	router.Get("/", api.IndexHandeler)
 	router.Get("/health", api.HealthHandeler)

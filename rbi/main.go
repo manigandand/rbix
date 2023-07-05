@@ -22,6 +22,10 @@ var (
 
 func main() {
 	addr := ":8888"
+	if os.Getenv("PORT") != "" {
+		addr = ":" + os.Getenv("PORT")
+	}
+
 	// read container_id from env
 	containerID = os.Getenv("CONTAINER_ID")
 	if containerID == "" {

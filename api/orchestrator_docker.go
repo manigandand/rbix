@@ -91,7 +91,7 @@ func (d *docker) StartRBIInstance(ctx context.Context, containerUniqeID string,
 	if err := cli.NetworkConnect(ctx, d.sqrxNetwork.ID, resp.ID, nil); err != nil {
 		return nil, errors.InternalServer("could not connect container to network: " + err.Error())
 	}
-	containerInfo.Container = resp
+	containerInfo.DocContainer = resp
 	containerInfo.ValidTill = time.Now().Add(10 * time.Minute)
 	containerInfo.Session = fmt.Sprintf("%s/%s/ws", SqrxWSLoadbalncerHost, containerUniqeID)
 	containerInfo.TerminationToken = uuid.New().String()
@@ -104,7 +104,7 @@ func (d *docker) StartRBIInstance(ctx context.Context, containerUniqeID string,
 	go func() {
 		<-time.After(10 * time.Minute)
 		if err := d.deleteContainer(context.Background(), containerInfo); err.NotNil() {
-			log.Println("could not delete container: ", err.Error())
+			log.Println("couldn't able to delete container: ", err.Error())
 		}
 	}()
 
@@ -132,9 +132,9 @@ func (d *docker) deleteContainer(ctx context.Context, cInfo *ContainerInfo) *err
 	defer cli.Close()
 
 	// stop container, ingore error since we try force remove
-	cli.ContainerStop(ctx, cInfo.Container.ID, container.StopOptions{})
+	cli.ContainerStop(ctx, cInfo.DocContainer.ID, container.StopOptions{})
 
-	if err := cli.ContainerRemove(ctx, cInfo.Container.ID, types.ContainerRemoveOptions{
+	if err := cli.ContainerRemove(ctx, cInfo.DocContainer.ID, types.ContainerRemoveOptions{
 		Force: true,
 	}); err != nil {
 		return errors.InternalServer("could not remove container: " + err.Error())
