@@ -7,15 +7,19 @@ data:
     config.api.json: |
         {
           "ENV": "dev-k8s",
-          "SQRX_WS_LOADBALANCER_HOST" : "http://localhost:8081"
+          "PORT": "8080",
+          "SQRX_WS_LOADBALANCER_HOST" : "in.malwareriplabs.sqrx.com",
+          "SQRX_RBI_IMAGE": "manigandanjeff/sqrx-rbi:latest"
         }
     config.angago.json: |
         {
           "ENV": "dev-k8s",
-          "SQRX_WS_LOADBALANCER_HOST" : "http://localhost:8081"
+          "PORT": "8081",
+          "SQRX_WS_LOADBALANCER_HOST" : "in.malwareriplabs.sqrx.com"
         }
     config.rbi.json: |
         {
           "ENV": "dev-k8s",
-          "SQRX_WS_LOADBALANCER_HOST" : "http://localhost:8081"
+          "PORT": "8888",
+          "SQRX_WS_LOADBALANCER_HOST" : "in.malwareriplabs.sqrx.com"
         }

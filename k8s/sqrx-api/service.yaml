@@ -25,7 +25,6 @@ metadata:
   labels:
     name: sqrx-api-gateway
 spec:
-  
   rules:
   - host: api.sqrx.com
     http:
