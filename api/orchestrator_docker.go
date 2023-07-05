@@ -103,7 +103,7 @@ func (d *docker) StartRBIInstance(ctx context.Context, containerUniqeID string,
 	// spinup background process to delete the container after 10 minutes
 	go func() {
 		<-time.After(10 * time.Minute)
-		if err := d.deleteContainer(containerInfo); err.NotNil() {
+		if err := d.deleteContainer(context.Background(), containerInfo); err.NotNil() {
 			log.Println("could not delete container: ", err.Error())
 		}
 	}()
@@ -118,14 +118,13 @@ func (d *docker) DestroyRBIInstance(ctx context.Context, terminationToken string
 		return err
 	}
 
-	return d.deleteContainer(cInfo)
+	return d.deleteContainer(ctx, cInfo)
 }
 
 // Stop - stop orchestrator
 func (d *docker) Stop() {}
 
-func (d *docker) deleteContainer(cInfo *ContainerInfo) *errors.AppError {
-	ctx := context.Background()
+func (d *docker) deleteContainer(ctx context.Context, cInfo *ContainerInfo) *errors.AppError {
 	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	if err != nil {
 		return errors.InternalServer("could not create docker client: " + err.Error())

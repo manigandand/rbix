@@ -27,10 +27,7 @@ func main() {
 	api.InitService("sqrx-api", "v1.0.0")
 
 	InitStore()
-
-	if Env == EnvLoclDocker {
-		initDockerSqrxNetwork()
-	}
+	InitOrchechestrator()
 
 	router := chi.NewRouter()
 
