@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqrx-rbi
+  namespace: platform
+spec:
+  selector:
+    matchLabels:
+      run: sqrx-rbi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: sqrx-rbi
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: sqrx-config
+            items:
+              - key: config.rbi.json
+                path: config.rbi.json
+      containers:
+        - name: sqrx-rbi
+          image: manigandanjeff/sqrx-rbi:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: 100Mi
+              cpu: 500m
+            requests:
+              memory: 64Mi
+              cpu: 500m
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+          imagePullPolicy: Always
+          env:
+            - name: ENV
+              value: dev-k8s
+            - name: PORT

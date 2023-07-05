@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqrx-angago
+  namespace: platform
+spec:
+  selector:
+    matchLabels:
+      run: sqrx-angago
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: sqrx-angago
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: sqrx-config
+            items:
+              - key: config.angago.json
+                path: config.angago.json
+      containers:
+        - name: sqrx-angago
+          image: manigandanjeff/sqrx-angago:latest
+          ports:
+            - containerPort: 8081
+          resources:
+            limits:
+              memory: 100Mi
+              cpu: 500m
+            requests:
+              memory: 64Mi
+              cpu: 500m
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+          imagePullPolicy: Always
+          env:
+            - name: VERSION
+              value: latest

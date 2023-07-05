@@ -31,6 +31,7 @@ cd ..
 # run sqrx-angago
 echo "======= Running sqrx-angago docker container =======>"
 docker run --rm -d -p 8081:8081 \
+    -v /angago/config.angago.json:/mnt/config/config.angago.json \
     --network sqrx-network \
     --name box-sqrx-angago-1 \
     --hostname box-sqrx-angago \
@@ -39,4 +40,4 @@ docker run --rm -d -p 8081:8081 \
 # run sqrx-api
 echo "======= Running sqrx-api docker container =======>"
 cd api
-./sqrx-api /api/config.api.json
+./sqrx-api config.api.json

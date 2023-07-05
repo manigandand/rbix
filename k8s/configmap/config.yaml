@@ -15,11 +15,11 @@ data:
         {
           "ENV": "dev-k8s",
           "PORT": "8081",
-          "SQRX_WS_LOADBALANCER_HOST" : "in.malwareriplabs.sqrx.com"
+          "SQRX_RBI_BOX_PORT" : "8888",
+          "SQRX_API_SERVER_HOST": "http://api.sqrx.com"
         }
     config.rbi.json: |
         {
           "ENV": "dev-k8s",
-          "PORT": "8888",
-          "SQRX_WS_LOADBALANCER_HOST" : "in.malwareriplabs.sqrx.com"
+          "PORT": "8888"
         }
