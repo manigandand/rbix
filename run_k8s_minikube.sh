@@ -14,8 +14,12 @@ kubectl apply -f k8s/namespace/sqrx-ns-platform.yaml
 kubectl apply -f k8s/configmap/config.yaml
 
 # update local dns /etc/hosts
-minikube ip 
-echo "$(minikube ip) api.sqrx.com in.malwareriplabs.sqrx.com" | sudo tee -a /etc/hosts
+minikube ip
+echo "$(minikube ip) app.sqrx.com api.sqrx.com in.malwareriplabs.sqrx.com" | sudo tee -a /etc/hosts
+
+# deploy sqrx-app
+kubectl apply -f k8s/sqrx-app/deployment.yaml
+kubectl apply -f k8s/sqrx-app/service.yaml
 
 # deploy sqrx-api
 kubectl apply -f k8s/sqrx-api/deployment.yaml

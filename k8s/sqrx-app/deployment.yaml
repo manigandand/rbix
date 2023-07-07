@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqrx-app
+  namespace: platform
+spec:
+  selector:
+    matchLabels:
+      run: sqrx-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: sqrx-app
+    spec:
+      containers:
+        - name: sqrx-app
+          image: manigandanjeff/sqrx-app:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: 100Mi
+              cpu: 500m
+            requests:
+              memory: 64Mi
+              cpu: 500m
+          imagePullPolicy: Always
+          env:
+            - name: VERSION
+              value: latest
