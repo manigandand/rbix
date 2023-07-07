@@ -1,0 +1,29 @@
+# Dependency directories
+/node_modules
+/.pnp
+.pnp.js
+
+# Built files
+/dist
+/build
+
+# Coverage directory
+/coverage
+
+# Log files
+*.log
+
+# Editor directories and files
+/.vscode
+/.idea
+/.vs
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.bak
+
+# Operating System files
+.DS_Store
+Thumbs.db

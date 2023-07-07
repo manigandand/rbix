@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="keywords"
+			content="Malware Protection, Cybersecurity, Online Document Viewer, Computer Security, Anti-Malware"
+		/>
+		<meta
+			name="description"
+			content="Malware.rip is powered by SquareX. Open documents from untrustworthy websites or users without fear of getting hacked."
+		/>
+		<meta name="author" content="elemis" />
+		<title>Malware.rip: powered by SquareX</title>
+		<link rel="shortcut icon" href="/static/favicon/squarex.png" />
+		<link rel="stylesheet" href="/static/css/plugins.css" />
+		<link rel="stylesheet" href="/static/css/style.css" />
+		<link rel="stylesheet" href="/static/css/sqrx.css" />
+		<link rel="stylesheet" href="/static/css/colors/grape.css" />
+		<link
+			rel="preload"
+			href="/static/css/fonts/space.css"
+			as="style"
+			onload="this.rel='stylesheet'"
+		/>
+		<style>
+			.navbar-stick {
+				display: none;
+			}
+		</style>
+
+		<!-- Start Single Page Apps for GitHub Pages -->
+		<script type="text/javascript">
+			// Single Page Apps for GitHub Pages
+			// https://github.com/rafrex/spa-github-pages
+			// Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+			// ----------------------------------------------------------------------
+			// This script checks to see if a redirect is present in the query string
+			// and converts it back into the correct url and adds it to the
+			// browser's history using window.history.replaceState(...),
+			// which won't cause the browser to attempt to load the new url.
+			// When the single page app is loaded further down in this file,
+			// the correct url will be waiting in the browser's history for
+			// the single page app to route accordingly.
+			(function (l) {
+				if (l.search) {
+					var q = {};
+					l.search
+						.slice(1)
+						.split("&")
+						.forEach(function (v) {
+							var a = v.split("=");
+							q[a[0]] = a.slice(1).join("=").replace(/~and~/g, "&");
+						});
+					if (q.p !== undefined) {
+						window.history.replaceState(
+							null,
+							null,
+							l.pathname.slice(0, -1) +
+								(q.p || "") +
+								(q.q ? "?" + q.q : "") +
+								l.hash
+						);
+					}
+				}
+			})(window.location);
+		</script>
+
+		<script src="https://www.google.com/recaptcha/api.js?render=6LcdTSAmAAAAAHN_11oK9GqjN9apkFc4ygXl83mm"></script>
+	</head>
+
+	<body class="bg-soft-primary">
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<div id="root"></div>
+
+		<div class="content-wrapper">
+			<header class="position-absolute w-100">
+				<div
+					class="gradient-5 text-white fw-bold fs-15 mb-2 position-relative"
+					style="z-index: 1"
+				>
+					<div class="container py-2 text-center">
+						<p class="mb-0">
+							✨ SquareX Launches Global Bug Bounty Program,
+							<a
+								href="/bugbounty/"
+								class="link-white hover d-inline-flex align-items-center"
+								>Read More<i class="uil uil-arrow-right fs-16"></i
+							></a>
+						</p>
+					</div>
+				</div>
+				<nav
+					class="navbar navbar-expand-lg center-nav transparent navbar-light"
+				>
+					<div class="container flex-lg-row flex-nowrap align-items-center">
+						<div class="navbar-brand">
+							<a href="/">
+								<img
+									src="/static/img/sqrx-logo.png"
+									srcset="/static/img/sqrx-logo.png 2x"
+									alt="SquareX"
+								/>
+							</a>
+						</div>
+						<div
+							class="navbar-collapse offcanvas offcanvas-nav offcanvas-start"
+						>
+							<div class="offcanvas-header d-lg-none">
+								<h3 class="text-black fs-30 mb-0">[Square]<sup>x</sup></h3>
+								<button
+									type="button"
+									class="btn-close btn-close-white"
+									data-bs-dismiss="offcanvas"
+									aria-label="Close"
+								></button>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</header>
+
+			<section class="wrapper bg-gradient-primary overflow-hidden">
+				<div class="container pt-19 text-center position-relative">
+					<div
+						class="position-absolute"
+						style="top: -15%; left: 50%; transform: translateX(-50%)"
+						data-cue="fadeIn"
+					>
+						<img src="/static/img/photos/blurry.png" alt="Background" />
+					</div>
+					<div class="row position-relative">
+						<div class="col-lg-12 mx-auto position-relative">
+							<div
+								class="position-absolute shape grape w-5 d-none d-lg-block"
+								style="top: -5%; left: -15%"
+								data-cue="fadeIn"
+								data-delay="1500"
+							>
+								<img
+									src="/static/img/svg/pie.svg"
+									class="svg-inject icon-svg w-100 h-100"
+									alt=""
+								/>
+							</div>
+							<div
+								class="position-absolute shape violet w-10 d-none d-lg-block"
+								style="bottom: 30%; left: -20%"
+								data-cue="fadeIn"
+								data-delay="1500"
+							>
+								<img
+									src="/static/img/svg/scribble.svg"
+									class="svg-inject icon-svg w-100 h-100"
+									alt=""
+								/>
+							</div>
+							<div
+								class="position-absolute shape fuchsia w-6 d-none d-lg-block"
+								style="top: 0%; right: -25%; transform: rotate(70deg)"
+								data-cue="fadeIn"
+								data-delay="1500"
+							>
+								<img
+									src="/static/img/svg/tri.svg"
+									class="svg-inject icon-svg w-100 h-100"
+									alt=""
+								/>
+							</div>
+							<div
+								class="position-absolute shape yellow w-6 d-none d-lg-block"
+								style="bottom: 25%; right: -17%"
+								data-cue="fadeIn"
+								data-delay="1500"
+							>
+								<img
+									src="/static/img/svg/circle.svg"
+									class="svg-inject icon-svg w-100 h-100"
+									alt=""
+								/>
+							</div>
+							<div data-cues="slideInDown" data-group="page-title">
+								<h1 class="display-1 fs-64 mb-5 mx-md-10 mx-lg-0">
+									Malware.rip<br /><span class="text-primary fs-20"
+										>Powered by SquareX</span
+									>
+								</h1>
+								<p class="lead fs-20 mb-8">
+									Open documents from untrustworthy websites or users without
+									fear of getting hacked. <br />We empower you to live
+									dangerously without ever being in danger.
+								</p>
+							</div>
+
+							<div
+								data-cues="slideInDown"
+								data-group="page-title"
+								class="col-md-6 mx-auto"
+								style="margin-top: -2rem"
+							>
+								<figure>
+									<img
+										class="img-fluid"
+										src="/static/img/sqrx-main.png"
+										srcset="/static/img/sqrx-main.png 2x"
+										alt="Anti-Malware"
+									/>
+								</figure>
+							</div>
+						</div>
+
+						<div
+							class="d-flex justify-content-center"
+							data-cues="slideInDown"
+							data-delay="600"
+							data-disabled="true"
+						>
+							<span
+								data-cue="slideInDown"
+								data-delay="600"
+								data-show="true"
+								style="
+									animation-name: slideInDown;
+									animation-duration: 700ms;
+									animation-timing-function: ease;
+									animation-delay: 600ms;
+									animation-direction: normal;
+									animation-fill-mode: both;
+								"
+								><button id="main-cta" class="btn btn-primary rounded-xl mx-1">
+									Create Disposable File Viewer
+								</button>
+								<div
+									class="g-recaptcha"
+									data-callback="onSubmitRecapture"
+									data-error-callback="onRecaptureFail"
+									data-sitekey="6LcdTSAmAAAAAHN_11oK9GqjN9apkFc4ygXl83mm"
+									data-size="invisible"
+								></div>
+							</span>
+						</div>
+						<div
+							class="d-flex justify-content-center"
+							data-cues="slideInDown"
+							data-delay="600"
+							data-disabled="true"
+						>
+							<span
+								data-cue="slideInDown"
+								data-delay="600"
+								data-show="true"
+								style="
+									animation-name: slideInDown;
+									animation-duration: 700ms;
+									animation-timing-function: ease;
+									animation-delay: 600ms;
+									animation-direction: normal;
+									animation-fill-mode: both;
+								"
+							>
+								<div class="fs-14"></div>
+							</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="wrapper bg-gradient-primary">
+				<div class="container py-8 pt-15">
+					<h2 class="display-4 mb-3">How it works?</h2>
+					<div class="position-relative">
+						<div
+							class="shape rounded-circle bg-soft-yellow rellax w-16 h-16"
+							data-rellax-speed="1"
+							style="bottom: 0.5rem; right: -1.7rem"
+						></div>
+						<div
+							class="shape bg-dot primary rellax w-16 h-16"
+							data-rellax-speed="1"
+							style="top: -1rem; left: -1.7rem"
+						></div>
+						<div
+							class="swiper-container dots-closer mb-6"
+							data-margin="0"
+							data-dots="true"
+							data-items-xl="3"
+							data-items-md="2"
+							data-items-xs="1"
+						>
+							<div class="swiper" id="swiper-resizable">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide">
+										<div class="item-inner">
+											<div class="card">
+												<div class="card-body">
+													<div class="card-title">
+														<figure class="card-number">1</figure>
+														<h2 class="mb-4">Upload</h2>
+													</div>
+													<img
+														src="/static/img/sqrx-1.png"
+														alt="Upload to File Viewer"
+													/>
+													<p class="mt-4" style="text-align: justify">
+														Received a suspicious document? Fret not! Just
+														upload it to our Disposable File Viewer, sit back,
+														and relax.
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="swiper-slide">
+										<div class="item-inner">
+											<div class="card">
+												<div class="card-body">
+													<div class="card-title">
+														<figure class="card-number">2</figure>
+														<h2 class="mb-4">View</h2>
+													</div>
+													<img
+														src="/static/img/sqrx-2.png"
+														alt="View Files Safely"
+													/>
+													<p class="mt-4" style="text-align: justify">
+														Safely view documents without any risk to your
+														computer. Our Disposable File Viewer securely
+														displays everything from the cloud, making sure no
+														malware can harm your system.
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="swiper-slide">
+										<div class="item-inner">
+											<div class="card">
+												<div class="card-body">
+													<div class="card-title">
+														<figure class="card-number">3</figure>
+														<h2 class="mb-4">Destroy</h2>
+													</div>
+													<img
+														src="/static/img/sqrx-3.png"
+														alt="Delete Contents of Session"
+													/>
+													<p class="mt-4" style="text-align: justify">
+														All done? Once you terminate the session, our
+														Disposable File Viewer ensures complete security and
+														privacy by permanently and irrecoverably destroying
+														everything within it, including your document.
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="wrapper bg-gradient-primary">
+				<div class="container py-8 py-md-8">
+					<div
+						class="row gx-md-8 gx-xl-12 gy-6 align-items-center justify-content-center justify-content-lg-start"
+					>
+						<h2 class="display-5 mb-3 col-md-8 col-lg-4 text-center">
+							Powered by SquareX
+						</h2>
+					</div>
+					<div class="row gx-md-8 gx-xl-12 gy-6 align-items-center">
+						<div class="col-md-8 col-lg-4 mx-auto">
+							<div class="img-mask">
+								<img src="/static/img/sqrx.png" alt="SquareX" />
+							</div>
+						</div>
+
+						<div class="col-lg-8">
+							<p style="text-align: justify">
+								The current generation of endpoint security products, such as
+								Anti-Virus/Malware/Spyware, operate on a probabilistic model.
+								They rely on signature databases and various heuristics to
+								determine whether a file possesses malicious intent.
+								Unfortunately, it has become evident that this approach is not
+								effective. The inconsistency among security products, with each
+								offering differing opinions on whether something is malicious,
+								only adds to the confusion.
+								<br /><br />
+								Unlike our counterparts, we at SquareX take a deterministic
+								approach to security, by offering a solution that stands out
+								from the rest. Malware.rip is a free community website powered
+								by SquareX's isolation technology with which users can now
+								fearlessly view any document, even those infected by malware,
+								without the worry of becoming compromised. By creating
+								Disposable File Viewers in the cloud and projecting them back to
+								the user's browser, the entire process seamlessly protects the
+								user. Even if a file contains malware, it poses no harm to the
+								user's computer, as it is opened within our secure cloud
+								service. Now, you can experience the thrill of living
+								dangerously without ever endangering yourself!
+								<br /><br />
+								To get exclusive and early access to our complete product before
+								we make it generally available, sign up to join our
+								<a href="https://t.co/BTCXaKKDUF" target="_blank">waitlist</a>.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="bg-dark text-inverse">
+				<div class="container py-13 py-md-15">
+					<div class="row gy-6 gy-lg-0">
+						<div class="col-md-4 col-lg-4">
+							<div class="widget">
+								<h4 class="widget-title text-white mb-3">Malware.rip</h4>
+
+								<p class="mb-4">
+									© 2023 SquareX<br class="d-none d-lg-block" />All rights
+									reserved.
+								</p>
+								<nav class="nav social social-white">
+									<a href="https://twitter.com/getsquarex"
+										><i class="uil uil-twitter"></i
+									></a>
+									<a href="https://www.linkedin.com/company/squarexonline/"
+										><i class="uil uil-linkedin"></i
+									></a>
+								</nav>
+							</div>
+						</div>
+
+						<div class="col-md-4 col-lg-4">
+							<div class="widget">
+								<h4 class="widget-title text-white mb-3">Get in Touch</h4>
+								<a href="mailto:founder@sqrx.com">founder@sqrx.com</a><br />
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<script src="/static/js/swiper-resizable.js"></script>
+			<script src="/static/js/recaptcha.js"></script>
+			<script src="/static/js/plugins.js"></script>
+			<script src="/static/js/theme.js"></script>
+		</div>
+		<!-- Default Statcounter code for Malware.rip
+https://malware.rip -->
+		<script type="text/javascript">
+			var sc_project = 12892215;
+			var sc_invisible = 1;
+			var sc_security = "fa139f26";
+		</script>
+		<script
+			type="text/javascript"
+			src="https://www.statcounter.com/counter/counter.js"
+			async
+		></script>
+		<noscript
+			><div class="statcounter">
+				<a
+					title="Web Analytics
+  Made Easy - Statcounter"
+					href="https://statcounter.com/"
+					target="_blank"
+					><img
+						class="statcounter"
+						src="https://c.statcounter.com/12892215/0/fa139f26/1/"
+						alt="Web Analytics Made Easy - Statcounter"
+						referrerpolicy="no-referrer-when-downgrade"
+				/></a></div
+		></noscript>
+		<!-- End of Statcounter Code -->
+	</body>
+</html>

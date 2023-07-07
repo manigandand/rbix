@@ -1,0 +1,453 @@
+body {
+	margin: 0;
+	font-family: "Space Grotesk", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+body {
+	margin: 0;
+	font-family: var(--bs-body-font-family);
+	font-size: var(--bs-body-font-size);
+	font-weight: var(--bs-body-font-weight);
+	line-height: var(--bs-body-line-height);
+	color: var(--bs-body-color);
+	text-align: var(--bs-body-text-align);
+	background-color: var(--bs-body-bg);
+	-webkit-text-size-adjust: 100%;
+	-webkit-tap-highlight-color: transparent;
+}
+
+code {
+	font-family: "Space Grotesk", source-code-pro, Menlo, Monaco, Consolas,
+		"Courier New", monospace;
+}
+
+.bg-soft-primary {
+	background-color: #f0f0f8 !important;
+}
+
+.content-wrapper {
+	flex-grow: 1;
+}
+
+.w-100 {
+	width: 100% !important;
+}
+.position-absolute {
+	position: absolute !important;
+}
+
+.gradient-5 {
+	background-image: linear-gradient(
+		43deg,
+		#4158d0 0,
+		#c850c0 46%,
+		#ffcc70 100%
+	);
+}
+
+.fs-15 {
+	font-size: 0.75rem !important;
+}
+.text-white {
+	--bs-text-opacity: 1;
+	color: #fff !important;
+}
+.fw-bold {
+	font-weight: 700 !important;
+}
+.mb-2 {
+	margin-bottom: 0.5rem !important;
+}
+.position-relative {
+	position: relative !important;
+}
+.text-center {
+	text-align: center !important;
+}
+.py-2 {
+	padding-top: 1rem !important;
+	padding-bottom: 1rem !important;
+}
+.top-tag {
+	text-shadow: 0 0 black;
+	font-size: larger;
+	font-weight: bolder;
+	margin-top: 0;
+}
+
+.mb-0 {
+	margin-bottom: 0 !important;
+}
+.m2p {
+	margin: 2% !important;
+}
+.bg-gradient-primary {
+	background: linear-gradient(180deg, #f0f0f8, rgba(255, 255, 255, 0) 100%);
+}
+
+.btn-span {
+	animation-name: slideInDown;
+	animation-duration: 700ms;
+	animation-timing-function: ease;
+	animation-delay: 600ms;
+	animation-direction: normal;
+	animation-fill-mode: both;
+}
+.navbar {
+	width: 100%;
+	z-index: 1020;
+}
+.navbar-expand-lg {
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+}
+.flex-lg-row {
+	flex-direction: row !important;
+}
+.align-items-center {
+	align-items: center !important;
+}
+.flex-nowrap {
+	flex-wrap: nowrap !important;
+}
+.brand {
+	margin-left: 10%;
+	margin-top: 2%;
+	font-size: xxx-large;
+}
+sup {
+	font-size: medium;
+	position: absolute;
+}
+.navbar-brand {
+	padding-top: var(--bs-navbar-brand-padding-y);
+	padding-bottom: var(--bs-navbar-brand-padding-y);
+	margin-right: var(--bs-navbar-brand-margin-end);
+	font-size: var(--bs-navbar-brand-font-size);
+	color: var(--bs-navbar-brand-color);
+	white-space: nowrap;
+}
+a {
+	transition: all 0.2s ease-in-out;
+}
+a {
+	color: var(--bs-link-color);
+	text-decoration: none;
+}
+.lead {
+	font-size: 0.95rem;
+	line-height: 1.6;
+}
+.fs-20 {
+	font-size: 1rem !important;
+}
+.mb-8 {
+	margin-bottom: 2rem !important;
+}
+.justify-content-center {
+	justify-content: center !important;
+}
+
+.d-flex {
+	display: flex !important;
+}
+.row > * {
+	flex-shrink: 0;
+	width: 100%;
+	max-width: 100%;
+	padding-right: calc(var(--bs-gutter-x) * 0.5);
+	padding-left: calc(var(--bs-gutter-x) * 0.5);
+	margin-top: var(--bs-gutter-y);
+}
+
+.btn-primary {
+	--bs-btn-active-bg: $main-color;
+	--bs-btn-active-border-color: $main-color;
+	--bs-btn-color: #fff;
+	--bs-btn-bg: #605dba;
+	--bs-btn-border-color: #605dba;
+	--bs-btn-hover-color: #fff;
+	--bs-btn-hover-bg: #605dba;
+	--bs-btn-hover-border-color: #605dba;
+	--bs-btn-focus-shadow-rgb: 120, 117, 196;
+	--bs-btn-active-color: #fff;
+	--bs-btn-active-bg: #605dba;
+	--bs-btn-active-border-color: #605dba;
+	--bs-btn-active-shadow: 0rem 0.25rem 0.75rem rgba(30, 34, 40, 0.15);
+	--bs-btn-disabled-color: #fff;
+	--bs-btn-disabled-bg: #605dba;
+	--bs-btn-disabled-border-color: #605dba;
+	background: #605dba;
+	color: #fff;
+	padding: 15px;
+	border: none;
+	height: 50px;
+}
+@keyframes scale {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.1);
+	}
+}
+
+.btn-primary:hover {
+	transform: translateY(-0.15rem);
+	box-shadow: 0 0.25rem 0.75rem rgba(30, 34, 40, 0.15);
+	cursor: pointer;
+}
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transform: translateY(0);
+	letter-spacing: -0.01rem;
+	position: relative;
+}
+
+.rounded-xl,
+.rounded-xl img,
+.rounded-xl > .plyr {
+	border-radius: 0.8rem !important;
+}
+.mx-1 {
+	margin-right: 0.25rem !important;
+	margin-left: 0.25rem !important;
+}
+
+body {
+	font-family: "Space Grotesk", sans-serif;
+	font-size: 0.85rem;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	word-spacing: 0.05rem;
+	overflow-x: hidden !important;
+	margin: 0;
+}
+.display-1 {
+	line-height: 1.15;
+}
+.fs-64 {
+	font-size: 3.2rem !important;
+}
+.mx-lg-0 {
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+}
+
+.mb-5 {
+	margin-bottom: 1.25rem !important;
+}
+.icon-list.bullet-bg i.bullet-white,
+.icon-list.bullet-bg i[class*="bullet-soft-primary"],
+.icon-list.bullet-white i,
+.link-dark:hover,
+.list-unstyled li a.active,
+.navbar.navbar-light.fixed .btn.btn-outline-primary:not(:hover),
+.plyr__control--overlaid:focus,
+.plyr__control--overlaid:hover,
+.sidebar nav .nav-link.active,
+.text-primary,
+.text-reset a:hover,
+a.text-reset:hover {
+	color: #605dba !important;
+}
+.fs-20 {
+	font-size: 1rem !important;
+}
+.row {
+	--bs-gutter-x: 1.5rem;
+	--bs-gutter-y: 0;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: calc(-1 * var(--bs-gutter-y));
+	margin-right: calc(-0.5 * var(--bs-gutter-x));
+	margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
+.text-center {
+	text-align: center !important;
+}
+
+.root {
+	margin: 6%;
+}
+
+@import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@1,300;1,400;1,500;1,600;1,700);
+@font-face {
+	font-family: "Space Grotesk";
+	src: url(../public/fonts/static/SpaceGrotesk-SemiBold.ttf) format("ttf");
+	font-weight: 600;
+	font-style: normal;
+	font-display: block;
+}
+@font-face {
+	font-family: "Space Grotesk";
+	src: url(../public/fonts/static/SpaceGrotesk-Light.ttf) format("ttf");
+	font-weight: 300;
+	font-style: normal;
+	font-display: block;
+}
+@font-face {
+	font-family: "Space Grotesk";
+	src: url(../public/fonts/static/SpaceGrotesk-Bold.ttf) format("ttf");
+	font-weight: 700;
+	font-style: normal;
+	font-display: block;
+}
+@font-face {
+	font-family: "Space Grotesk";
+	src: url(../public/fonts/static/SpaceGrotesk-Medium.ttf) format("ttf");
+	font-weight: 500;
+	font-style: normal;
+	font-display: block;
+}
+@font-face {
+	font-family: "Space Grotesk";
+	src: url(../public/fonts/static/SpaceGrotesk-Regular.ttf) format("ttf");
+	font-weight: 400;
+	font-style: normal;
+	font-display: block;
+}
+* {
+	word-spacing: normal !important;
+}
+body {
+	font-family: "Space Grotesk", sans-serif;
+	font-size: 0.85rem;
+}
+em {
+	font-family: "IBM Plex Serif", serif;
+}
+.counter-wrapper p,
+.lead,
+.nav-tabs.nav-tabs-bg .nav-link p,
+blockquote,
+body {
+	font-weight: 400;
+}
+.accordion-wrapper .card-header button,
+.badge,
+.btn,
+.btn.btn-circle .number,
+.collapse-link,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6,
+.dropdown-item,
+.filter:not(.basic-filter),
+.filter:not(.basic-filter) ul li a,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.meta,
+.more,
+.nav-link,
+.post-category,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 600;
+}
+.btn .more,
+.dropdown-item,
+.nav-link {
+	letter-spacing: normal;
+}
+.btn,
+.lg-sub-html p,
+.nav-link,
+.nav-link p,
+.navbar .btn-sm {
+	font-size: 0.85rem;
+}
+.dropdown-menu {
+	font-size: 0.8rem;
+}
+.btn-group-sm > .btn,
+.btn-sm,
+.post-meta,
+.share-dropdown .dropdown-menu .dropdown-item {
+	font-size: 0.75rem;
+}
+.accordion-wrapper .card-header button,
+.collapse-link,
+.nav-tabs .nav-link {
+	font-size: 0.9rem !important;
+}
+.btn {
+	padding-top: 0.55rem;
+	padding-bottom: 0.45rem;
+}
+.btn-group-sm > .btn,
+.btn-sm {
+	padding-top: 0.45rem;
+	padding-bottom: 0.35rem;
+}
+.btn-group-lg > .btn,
+.btn-lg {
+	padding-top: 0.7rem;
+	padding-bottom: 0.6rem;
+}
+blockquote.icon:before {
+	top: -0.9rem;
+}
+.counter-wrapper p {
+	font-size: 0.85rem;
+}
+.counter-wrapper .counter {
+	font-size: calc(1.33rem + 0.96vw);
+}
+@media (min-width: 1200px) {
+	.counter-wrapper .counter {
+		font-size: 2.05rem;
+	}
+}
+.counter-wrapper .counter.counter-lg {
+	font-size: calc(1.35rem + 1.2vw);
+}
+@media (min-width: 1200px) {
+	.counter-wrapper .counter.counter-lg {
+		font-size: 2.25rem;
+	}
+}
+.lead {
+	font-size: 0.95rem;
+	line-height: 1.6;
+}
+.lead.fs-lg {
+	line-height: 1.55;
+}
+.display-1 {
+	line-height: 1.15;
+}
+.display-2 {
+	line-height: 1.2;
+}
+.display-3 {
+	line-height: 1.2;
+}
+.display-4 {
+	line-height: 1.25;
+}
+.display-5 {
+	line-height: 1.25;
+}
+.display-6 {
+	line-height: 1.3;
+}
