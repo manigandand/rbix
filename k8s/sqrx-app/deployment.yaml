@@ -20,11 +20,11 @@ spec:
             - containerPort: 3000
           resources:
             limits:
-              memory: 100Mi
+              memory: 2500Mi
               cpu: 500m
             requests:
-              memory: 64Mi
-              cpu: 500m
+              memory: 2000Mi
+              cpu: 250m
           imagePullPolicy: Always
           env:
             - name: VERSION
