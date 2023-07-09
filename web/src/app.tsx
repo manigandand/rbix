@@ -42,7 +42,7 @@ function App() {
 		try {
 			// Create a disposable file viewer session
 			const response = await axios.post("http://api.sqrx.com/v1/try", null);
-			const data = await response.data;
+			const data = response.data;
 			console.log(data);
 			setSessionData({
 				session: data.session,
@@ -59,24 +59,44 @@ function App() {
 			setTerminationToken(data.termination_token);
 			setSessionStart(true);
 
-			return (
-				<div style={{ margin: "1rem" }}>
-					<VncScreen
-						url={"ws://localhost:5800"}
-						scaleViewport
-						background="#000000"
-						style={{
-							width: "75vw",
-							height: "75vh",
-						}}
-						debug
-						ref={vncScreenRef}
-					/>
-				</div>
-			);
+			// hide the main content
+			const maincon = document.getElementById("main-content");
+			if (maincon) {
+				maincon.className = "d-none";
+			}
+			const createBtn = document.getElementById("main-cta-container");
+			if (createBtn) {
+				createBtn.className = "d-none";
+			}
 		} catch (error) {
 			console.log(error);
 			alert("Error creating disposable file viewer session " + error);
+		}
+	};
+
+	// destroy the disposable file viewer session
+	const destroySqrxSession = async () => {
+		try {
+			// Create a disposable file viewer session
+			console.log("destroy session of terminationToken: " + terminationToken);
+			const response = await axios.post(
+				`http://api.sqrx.com/v1/stop/${terminationToken}`,
+				null
+			);
+			console.log(response.data);
+			setSessionStart(false);
+
+			const maincon = document.getElementById("main-content");
+			if (maincon) {
+				maincon.className = "d-show";
+			}
+			const createBtn = document.getElementById("main-cta-container");
+			if (createBtn) {
+				createBtn.className = "d-show";
+			}
+		} catch (error) {
+			console.log(error);
+			alert("Error destroying disposable file viewer session " + error);
 		}
 	};
 
@@ -84,6 +104,7 @@ function App() {
 		<>
 			{/* Create Disposable File Viewer button */}
 			<div
+				id="main-cta-container"
 				className="d-flex justify-content-center m2p"
 				data-cues="slideInDown"
 				data-delay="600"
@@ -108,15 +129,17 @@ function App() {
 
 			{/* connect to the VNC server via sqrx-angago reverse proxy  */}
 			{/* "ws://localhost:8888/box-sqrx-rbi-1/ws" */}
+			{/* "ws://localhost:5800/ws" */}
 			{sessionReady ? (
+				// hide the main CTA button
+
 				<div style={{ margin: "1rem" }}>
 					{isValidSession(vncUrl) ? (
 						<VncScreen
 							url={vncUrl}
-							scaleViewport
-							background="#000000"
+							scaleViewport={true}
+							background="#605dba"
 							style={{
-								width: "75vw",
 								height: "75vh",
 							}}
 							debug
@@ -125,45 +148,23 @@ function App() {
 					) : (
 						<div>Sqrx Session invalid.</div>
 					)}
-				</div>
-			) : (
-				""
-			)}
 
-			{/* {isValidSession(vncUrl) ? (
-				<div style={{ margin: "1rem" }}>
-					<VncScreen
-						url={"ws://localhost:5800"}
-						scaleViewport
-						background="#000000"
-						style={{
-							width: "75vw",
-							height: "75vh",
-						}}
-						debug
-						ref={vncScreenRef}
-					/>
-				</div>
-			) : (
-				<div>VNC URL not provided.</div>
-			)} */}
-
-			{/* destroy the session */}
-			{vncScreenRef.current?.connected ? (
-				<div style={{ margin: "1rem" }}>
-					<button
-						onClick={() => {
-							const { connect, connected, disconnect } =
-								vncScreenRef.current ?? {};
-							if (connected) {
-								disconnect?.();
-								return;
-							}
-							connect?.();
-						}}
-					>
-						🔥 Destroy Session
-					</button>
+					{/* destroy the session */}
+					<div className="destroy-btn">
+						<span
+							className="btn-span"
+							data-cue="slideInDown"
+							data-delay="600"
+							data-show="true"
+						>
+							<button
+								className="btn btn-primary rounded-xl mx-1"
+								onClick={destroySqrxSession}
+							>
+								🔥 Destroy Session
+							</button>
+						</span>
+					</div>
 				</div>
 			) : (
 				""

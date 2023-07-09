@@ -20,6 +20,8 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 
 ![squarex-app](/web/static/img/app.sqrx.com.png)
 
+![squarex-app](/web/static/img/app.sqrx.session.png)
+
 ### How to run: via k8s minikube
 
 ```bash

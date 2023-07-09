@@ -274,9 +274,24 @@ a.text-reset:hover {
 .text-center {
 	text-align: center !important;
 }
+.d-none {
+	display: none !important;
+}
+.d-show {
+	display: block !important;
+}
+#main-cta-container {
+	text-align: center;
+}
+.destroy-btn {
+	text-align: right;
+	background: fixed;
+	margin-top: 1.5rem;
+}
 
 .root {
 	margin: 6%;
+	margin-bottom: 0;
 }
 
 @import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@1,300;1,400;1,500;1,600;1,700);
