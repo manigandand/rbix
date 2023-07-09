@@ -54,8 +54,9 @@ function App() {
 
 			console.log(sessionData);
 			const wsURL = `ws://${data?.session}`;
-			alert(wsURL);
-			setVncUrl(`ws://${sessionData.session}`);
+			// alert("connecting to session " + wsURL);
+			alert("use password 'password' to connect to session");
+			setVncUrl(wsURL);
 			setTerminationToken(data.termination_token);
 			setSessionStart(true);
 
