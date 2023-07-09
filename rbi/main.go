@@ -204,9 +204,7 @@ func (p *Websockify) ReadWebSocket() {
 // writes to the WebSocket.
 func (p *Websockify) ReadTCP() {
 	log.Println("reading tcp stream")
-	// buffer := make([]byte, 6000)
-	buffer := []byte{}
-	// p.wsConn.WriteMessage(websocket.TextMessage, []byte("hello from rbi"))
+	buffer := make([]byte, 6000)
 
 	for {
 		bytesRead, err := p.tcpConn.Read(buffer)
@@ -215,18 +213,13 @@ func (p *Websockify) ReadTCP() {
 			p.close("[error_read_tcp] " + err.Error())
 			break
 		}
-		log.Println("[read] from VCN server:", bytesRead, string(buffer))
-		// if bytesRead == 0 {
-		// 	log.Println("[debug] read tcp: bytesRead is 0")
-		// 	continue
-		// }
+		log.Println("[read] from VCN server: ", bytesRead)
 
-		if err := p.wsConn.WriteMessage(websocket.BinaryMessage, buffer); err != nil {
+		if err := p.wsConn.WriteMessage(websocket.BinaryMessage, buffer[:bytesRead]); err != nil {
 			p.close("[error_write_to_ws] " + err.Error())
 			log.Println("[error] write tcpToWebSocket:", err.Error())
 			break
 		}
-		time.Sleep(1 * time.Second)
 	}
 }
 
