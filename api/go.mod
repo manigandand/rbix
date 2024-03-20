@@ -3,7 +3,7 @@ module rbix/api
 go 1.19
 
 require (
-	github.com/docker/docker v24.0.2+incompatible
+	github.com/docker/docker v24.0.9+incompatible
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/google/uuid v1.3.0
 	github.com/manigandand/adk v1.0.2
