@@ -1,4 +1,4 @@
-# squarex
+# RbiX - Remote Browser Isolations
 
 Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 
