@@ -18,6 +18,8 @@ RUN chmod 600 ~/.vnc/passwd
 # Expose VNC port
 EXPOSE 80
 
+# TODO: passwordless tightvncserver
+
 # Start VNC server
 CMD tightvncserver :1 -rfbauth ~/.vnc/passwd -auth ~/.vnc/passwd -geometry 1280x800 -depth 24 && \
     websockify -D --web=/usr/share/novnc/ --cert=~/novnc.pem 80 localhost:5901 && tail -f /dev/null
