@@ -6,13 +6,13 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 
 ## Kubernetes deployment architecture
 
-![rbix-k8s](/asset/rbix-archi-k8s.jpg)
+![rbix-k8s](/asset/rbix-archi-k8s.png)
 
 ---
 
 ## Docker deployment architecture
 
-![rbix](/asset/rbix-archi-docker.jpg)
+![rbix](/asset/rbix-archi-docker.png)
 
 ---
 
