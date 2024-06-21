@@ -1,4 +1,4 @@
-module sqrx/angago
+module rbix/angago
 
 go 1.18
 

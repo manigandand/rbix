@@ -22,11 +22,11 @@ var (
 	// Port is the port number to run the server
 	Port = "8080"
 
-	// SqrxWSLoadbalncerHost is the host name of the load balancer
-	SqrxWSLoadbalncerHost = "localhost:8081"
+	// RbiXWSLoadbalncerHost is the host name of the load balancer
+	RbiXWSLoadbalncerHost = "localhost:8081"
 
-	// SqrxRbiImage is the docker image name of sqrx-rbi
-	SqrxRbiImage = "manigandanjeff/sqrx-rbi:latest"
+	// RbiXRbiImage is the docker image name of rbix-rbi
+	RbiXRbiImage = "manigandanjeff/rbix-rbi:latest"
 )
 
 // Initialize initializes all the env variables for this package.
@@ -47,8 +47,8 @@ func Initialize(files ...string) {
 
 	addNewEnvEntry("ENV", &Env, Env)
 	addNewEnvEntry("PORT", &Port, Port)
-	addNewEnvEntry("SQRX_WS_LOADBALANCER_HOST", &SqrxWSLoadbalncerHost, SqrxWSLoadbalncerHost)
-	addNewEnvEntry("SQRX_RBI_IMAGE", &SqrxRbiImage, SqrxRbiImage)
+	addNewEnvEntry("RBIX_WS_LOADBALANCER_HOST", &RbiXWSLoadbalncerHost, RbiXWSLoadbalncerHost)
+	addNewEnvEntry("RBIX_RBI_IMAGE", &RbiXRbiImage, RbiXRbiImage)
 
 	// load all the env variables. Must be called at the end.
 	load()

@@ -38,10 +38,10 @@ function App() {
 	};
 
 	// init the disposable file viewer session
-	const initSqrxSession = async () => {
+	const initRbixSession = async () => {
 		try {
 			// Create a disposable file viewer session
-			const response = await axios.post("http://api.sqrx.com/v1/try", null);
+			const response = await axios.post("http://api.rbixlabs.com/v1/try", null);
 			const data = response.data;
 			console.log(data);
 			setSessionData({
@@ -76,12 +76,12 @@ function App() {
 	};
 
 	// destroy the disposable file viewer session
-	const destroySqrxSession = async () => {
+	const destroyRbixSession = async () => {
 		try {
 			// Create a disposable file viewer session
 			console.log("destroy session of terminationToken: " + terminationToken);
 			const response = await axios.post(
-				`http://api.sqrx.com/v1/stop/${terminationToken}`,
+				`http://api.rbixlabs.com/v1/stop/${terminationToken}`,
 				null
 			);
 			console.log(response.data);
@@ -120,7 +120,7 @@ function App() {
 					<button
 						id="main-cta"
 						className="btn btn-primary rounded-xl mx-1"
-						onClick={initSqrxSession}
+						onClick={initRbixSession}
 					>
 						Create Disposable File Viewer
 					</button>
@@ -128,8 +128,8 @@ function App() {
 			</div>
 			{/* End Create Disposable File Viewer button */}
 
-			{/* connect to the VNC server via sqrx-angago reverse proxy  */}
-			{/* "ws://localhost:8888/box-sqrx-rbi-1/ws" */}
+			{/* connect to the VNC server via rbix-angago reverse proxy  */}
+			{/* "ws://localhost:8888/box-rbix-rbi-1/ws" */}
 			{/* "ws://localhost:5800/ws" */}
 			{sessionReady ? (
 				// hide the main CTA button
@@ -147,7 +147,7 @@ function App() {
 							ref={vncScreenRef}
 						/>
 					) : (
-						<div>Sqrx Session invalid.</div>
+						<div>RbiX Session invalid.</div>
 					)}
 
 					{/* destroy the session */}
@@ -160,7 +160,7 @@ function App() {
 						>
 							<button
 								className="btn btn-primary rounded-xl mx-1"
-								onClick={destroySqrxSession}
+								onClick={destroyRbixSession}
 							>
 								🔥 Destroy Session
 							</button>

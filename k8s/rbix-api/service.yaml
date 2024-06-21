@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sqrx-api
+  name: rbix-api
   namespace: platform
   labels:
-    run: sqrx-api
+    run: rbix-api
 spec:
   type: NodePort
   ports:
@@ -13,26 +13,26 @@ spec:
     targetPort: 8080
     protocol: TCP
   selector:
-    run: sqrx-api
+    run: rbix-api
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sqrx-api-gateway
+  name: rbix-api-gateway
   namespace: platform
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   labels:
-    name: sqrx-api-gateway
+    name: rbix-api-gateway
 spec:
   rules:
-  - host: api.sqrx.com
+  - host: api.rbix.com
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: sqrx-api
+            name: rbix-api
             port:
               number: 8080

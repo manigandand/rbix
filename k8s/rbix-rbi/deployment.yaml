@@ -1,41 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sqrx-angago
+  name: rbix-rbi
   namespace: platform
 spec:
   selector:
     matchLabels:
-      run: sqrx-angago
+      run: rbix-rbi
   replicas: 1
   template:
     metadata:
       labels:
-        run: sqrx-angago
+        run: rbix-rbi
     spec:
       volumes:
         - name: config-volume
           configMap:
-            name: sqrx-config
+            name: rbix-config
             items:
-              - key: config.angago.json
-                path: config.angago.json
+              - key: config.rbi.json
+                path: config.rbi.json
       containers:
-        - name: sqrx-angago
-          image: manigandanjeff/sqrx-angago:latest
+        - name: rbix-rbi
+          image: manigandanjeff/rbix-rbi:latest
           ports:
-            - containerPort: 8081
+            - containerPort: 8080
           resources:
             limits:
-              memory: 100Mi
-              cpu: 500m
+              memory: 2500Mi
+              cpu: 700m
             requests:
-              memory: 64Mi
+              memory: 2000Mi
               cpu: 500m
           volumeMounts:
             - name: config-volume
               mountPath: /config
           imagePullPolicy: Always
           env:
-            - name: VERSION
-              value: latest
+            - name: ENV
+              value: dev-k8s
+            - name: PORT

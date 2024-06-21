@@ -3,7 +3,7 @@ FROM node:alpine
 LABEL app="app"
 LABEL maintainer="manigandan.jeff@gmail.com"
 LABEL version="1.0.0"
-LABEL description="app.sqrx.com - web app vnc client"
+LABEL description="app.rbixlabs.com - web app vnc client"
 
 WORKDIR /app
 

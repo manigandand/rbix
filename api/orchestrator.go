@@ -12,10 +12,10 @@ var orchestrator Orchestrator
 
 // Orchestrator - orchestrator interface
 type Orchestrator interface {
-	// StartRBIInstance - start new sqrx-rbi instance
+	// StartRBIInstance - start new rbix-rbi instance
 	StartRBIInstance(ctx context.Context, containerUniqeID string) (*ContainerInfo, *errors.AppError)
 
-	// DestroyRBIInstance - destroy sqrx-rbi instance
+	// DestroyRBIInstance - destroy rbix-rbi instance
 	DestroyRBIInstance(ctx context.Context, terminationToken string) *errors.AppError
 
 	// Stop - stop orchestrator

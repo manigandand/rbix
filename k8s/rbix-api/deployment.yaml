@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sqrx-api
+  name: rbix-api
   namespace: platform
 spec:
   selector:
     matchLabels:
-      run: sqrx-api
+      run: rbix-api
   replicas: 1
   template:
     metadata:
       labels:
-        run: sqrx-api
+        run: rbix-api
     spec:
       volumes:
         - name: config-volume
           configMap:
-            name: sqrx-config
+            name: rbix-config
             items:
               - key: config.api.json
                 path: config.api.json
       containers:
-        - name: sqrx-api
-          image: manigandanjeff/sqrx-api:latest
+        - name: rbix-api
+          image: manigandanjeff/rbix-api:latest
           ports:
             - containerPort: 8080
           resources:

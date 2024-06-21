@@ -1,20 +1,20 @@
-# SquareX - API Server
+# Rbix - API Server
 
-API Server - responsible for managing the containers and provisioning new sqrx-rbi containers.
+API Server - responsible for managing the containers and provisioning new rbix-rbi containers.
 
 ```bash
 # build the docker image
-CGO_ENABLED=0 GOOS=linux go build -o sqrx-api -ldflags "-w -s"
+CGO_ENABLED=0 GOOS=linux go build -o rbix-api -ldflags "-w -s"
 
-docker build -t manigandanjeff/sqrx-api:latest .
-docker push manigandanjeff/sqrx-api:latest
+docker build -t manigandanjeff/rbix-api:latest .
+docker push manigandanjeff/rbix-api:latest
 # ---------------------------------------------
 
 docker run -d -p 8080:8080 \
-    --network sqrx-network \
-    --name sqrx-api-1 \
-    --hostname sqrx-api \
-    manigandanjeff/sqrx-api:latest
+    --network rbix-network \
+    --name rbix-api-1 \
+    --hostname rbix-api \
+    manigandanjeff/rbix-api:latest
 ```
 
 - POST /try -> endpoint to spin up a new container

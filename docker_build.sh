@@ -1,25 +1,25 @@
 #!/bin/sh
 
 # build binary and docker images
-# sqrx-api
-echo "======= Building sqrx-api =======>"
+# rbix-api
+echo "======= Building rbix-api =======>"
 cd api
-CGO_ENABLED=0 GOOS=linux go build -o sqrx-api -ldflags "-w -s"
-docker build -t manigandanjeff/sqrx-api:latest .
-docker push manigandanjeff/sqrx-api:latest
+CGO_ENABLED=0 GOOS=linux go build -o rbix-api -ldflags "-w -s"
+docker build -t manigandanjeff/rbix-api:latest .
+docker push manigandanjeff/rbix-api:latest
 
-# sqrx-angago
-echo "======= Building sqrx-angago =======>"
+# rbix-angago
+echo "======= Building rbix-angago =======>"
 cd ../angago
 
-CGO_ENABLED=0 GOOS=linux go build -o sqrx-angago -ldflags "-w -s"
-docker build -t manigandanjeff/sqrx-angago:latest .
-docker push manigandanjeff/sqrx-angago:latest
+CGO_ENABLED=0 GOOS=linux go build -o rbix-angago -ldflags "-w -s"
+docker build -t manigandanjeff/rbix-angago:latest .
+docker push manigandanjeff/rbix-angago:latest
 
-# sqrx-rbi
-echo "======= Building sqrx-rbi =======>"
+# rbix-rbi
+echo "======= Building rbix-rbi =======>"
 cd ../rbi
 
-CGO_ENABLED=0 GOOS=linux go build -o sqrx-rbi -ldflags "-w -s"
-docker build -t manigandanjeff/sqrx-rbi:latest .
-docker push manigandanjeff/sqrx-rbi:latest
+CGO_ENABLED=0 GOOS=linux go build -o rbix-rbi -ldflags "-w -s"
+docker build -t manigandanjeff/rbix-rbi:latest .
+docker push manigandanjeff/rbix-rbi:latest

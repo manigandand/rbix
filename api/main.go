@@ -25,7 +25,7 @@ func main() {
 	// initialize config
 	Initialize(os.Args[1:]...)
 
-	api.InitService("sqrx-api", "v1.0.0")
+	api.InitService("rbix-api", "v1.0.0")
 
 	InitStore()
 	InitOrchechestrator()
@@ -85,7 +85,7 @@ func main() {
 		os.Exit(1)
 	}()
 
-	log.Println("Sqrx-api-server listening on ", Port)
+	log.Println("RbiX-api-server listening on ", Port)
 	if err := http.ListenAndServe(fmt.Sprintf(":%s", Port), router); err != nil {
 		log.Fatal(err.Error())
 	}

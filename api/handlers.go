@@ -9,7 +9,7 @@ import (
 	"github.com/manigandand/adk/respond"
 )
 
-// creates a new sqrx-rbi container. we assume that the `image` is already pulled
+// creates a new rbix-rbi container. we assume that the `image` is already pulled
 func newSqureXSessionHandler(w http.ResponseWriter, r *http.Request) *errors.AppError {
 	// NOTE: ignoring the auth cases to validate the client already authenticated
 	// and or check if any session is already active

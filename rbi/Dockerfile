@@ -9,7 +9,7 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-COPY sqrx-rbi sqrx-rbi
+COPY rbix-rbi rbix-rbi
 
 FROM ubuntu:latest
 
@@ -28,7 +28,7 @@ RUN mkdir -p ~/.vnc
 RUN echo "password" | vncpasswd -f > ~/.vnc/passwd
 RUN chmod 600 ~/.vnc/passwd
 
-COPY --from=builder /app/sqrx-rbi /app/sqrx-rbi
+COPY --from=builder /app/rbix-rbi /app/rbix-rbi
 
 # Load ENV
 # Set Locales to support UTF-8 encoding to support non ASCII characters i.e. emojis
@@ -39,4 +39,4 @@ EXPOSE 8888
 
 # Start VNC server
 CMD tightvncserver :1 -rfbauth ~/.vnc/passwd -auth ~/.vnc/passwd -geometry 1280x800 -depth 24 && \
-    /app/sqrx-rbi && tail -f /dev/null
+    /app/rbix-rbi && tail -f /dev/null

@@ -43,7 +43,7 @@ func NewK8sOrchestrator() (Orchestrator, *errors.AppError) {
 	}, nil
 }
 
-// StartRBIInstance - start new sqrx-rbi instance
+// StartRBIInstance - start new rbix-rbi instance
 func (k *k8s) StartRBIInstance(ctx context.Context, containerUniqeID string,
 ) (*ContainerInfo, *errors.AppError) {
 	containerInfo := &ContainerInfo{
@@ -65,7 +65,7 @@ func (k *k8s) StartRBIInstance(ctx context.Context, containerUniqeID string,
 
 	// create deployment
 	depRes, err := k.client.AppsV1().Deployments(containerUniqeID).Create(
-		ctx, newSqrxRBIDeployment(containerUniqeID), metav1.CreateOptions{},
+		ctx, newRbiXRBIDeployment(containerUniqeID), metav1.CreateOptions{},
 	)
 	if err != nil {
 		return nil, errors.InternalServer("could not create deployment: " + err.Error())
@@ -73,7 +73,7 @@ func (k *k8s) StartRBIInstance(ctx context.Context, containerUniqeID string,
 
 	// create service
 	svcRes, err := k.client.CoreV1().Services(containerUniqeID).Create(
-		ctx, newSqrxRBIService(containerUniqeID), metav1.CreateOptions{},
+		ctx, newRbiXRBIService(containerUniqeID), metav1.CreateOptions{},
 	)
 	if err != nil {
 		return nil, errors.InternalServer("could not expose container: " + err.Error())
@@ -83,7 +83,7 @@ func (k *k8s) StartRBIInstance(ctx context.Context, containerUniqeID string,
 
 	containerInfo.K8sContainer = depRes
 	containerInfo.ValidTill = time.Now().Add(10 * time.Minute)
-	containerInfo.Session = fmt.Sprintf("%s/%s/ws", SqrxWSLoadbalncerHost, containerUniqeID)
+	containerInfo.Session = fmt.Sprintf("%s/%s/ws", RbiXWSLoadbalncerHost, containerUniqeID)
 	containerInfo.TerminationToken = uuid.New().String()
 
 	// save to db
@@ -101,7 +101,7 @@ func (k *k8s) StartRBIInstance(ctx context.Context, containerUniqeID string,
 	return containerInfo, nil
 }
 
-// DestroyRBIInstance - destroy sqrx-rbi instance
+// DestroyRBIInstance - destroy rbix-rbi instance
 func (k *k8s) DestroyRBIInstance(ctx context.Context, terminationToken string) *errors.AppError {
 	cInfo, err := db.GetContainerInfoByTermToken(terminationToken)
 	if err.NotNil() {
@@ -121,26 +121,26 @@ func (k *k8s) DestroyRBIInstance(ctx context.Context, terminationToken string) *
 func (k *k8s) Stop() {
 }
 
-func newSqrxRBIDeployment(containerUniqeID string) *appsv1.Deployment {
+func newRbiXRBIDeployment(containerUniqeID string) *appsv1.Deployment {
 	deployment := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      "sqrx-rbi",
+			Name:      "rbix-rbi",
 			Namespace: containerUniqeID,
 		},
 		Spec: appsv1.DeploymentSpec{
 			Replicas: int32Ptr(1),
 			Selector: &metav1.LabelSelector{
-				MatchLabels: map[string]string{"run": "sqrx-rbi"},
+				MatchLabels: map[string]string{"run": "rbix-rbi"},
 			},
 			Template: v1.PodTemplateSpec{
 				ObjectMeta: metav1.ObjectMeta{
-					Labels: map[string]string{"run": "sqrx-rbi"},
+					Labels: map[string]string{"run": "rbix-rbi"},
 				},
 				Spec: v1.PodSpec{
 					Containers: []v1.Container{
 						{
-							Name:  "sqrx-rbi",
-							Image: SqrxRbiImage,
+							Name:  "rbix-rbi",
+							Image: RbiXRbiImage,
 							Ports: []v1.ContainerPort{
 								{
 									Name:          "http",
@@ -181,15 +181,15 @@ func newSqrxRBIDeployment(containerUniqeID string) *appsv1.Deployment {
 	return deployment
 }
 
-func newSqrxRBIService(containerUniqeID string) *v1.Service {
+func newRbiXRBIService(containerUniqeID string) *v1.Service {
 	svc := &v1.Service{
 		ObjectMeta: metav1.ObjectMeta{
-			Name:      "sqrx-rbi",
+			Name:      "rbix-rbi",
 			Namespace: containerUniqeID,
-			Labels:    map[string]string{"run": "sqrx-rbi"},
+			Labels:    map[string]string{"run": "rbix-rbi"},
 		},
 		Spec: v1.ServiceSpec{
-			Selector: map[string]string{"run": "sqrx-rbi"},
+			Selector: map[string]string{"run": "rbix-rbi"},
 			Type:     v1.ServiceTypeClusterIP,
 			Ports: []v1.ServicePort{
 				{

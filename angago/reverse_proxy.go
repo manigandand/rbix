@@ -16,8 +16,8 @@ import (
 var (
 	defaultUpgrader = &websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool {
-			// Allow connections from sqrx-client container only
-			// if r.Host != "sqrx-client" {
+			// Allow connections from rbix-client container only
+			// if r.Host != "rbix-client" {
 			// 	return false
 			// }
 			return true
@@ -30,7 +30,7 @@ var (
 
 func getContainerInfo(cintainerID string) (time.Time, error) {
 	now := time.Now()
-	url := fmt.Sprintf("%s/v1/status/%s", SqrxAPIServer, cintainerID)
+	url := fmt.Sprintf("%s/v1/status/%s", RbiXAPIServer, cintainerID)
 	resp, err := http.Get(url)
 	if err != nil {
 		return now, err
@@ -51,9 +51,9 @@ func getContainerInfo(cintainerID string) (time.Time, error) {
 
 func angagoServer(w http.ResponseWriter, r *http.Request) {
 	containerID := chi.URLParam(r, "container_id")
-	targetURL := fmt.Sprintf("ws://%s:%s/%s/ws", containerID, SqrxRBIBoxPort, containerID)
+	targetURL := fmt.Sprintf("ws://%s:%s/%s/ws", containerID, RbiXRBIBoxPort, containerID)
 
-	// check if the container id valid or not from sqrx-api
+	// check if the container id valid or not from rbix-api
 	if Env == EnvLocalK8s {
 		validTill, err := getContainerInfo(containerID)
 		if err != nil {
@@ -63,8 +63,8 @@ func angagoServer(w http.ResponseWriter, r *http.Request) {
 		}
 		log.Println("session valid till:", validTill)
 
-		targetURL = fmt.Sprintf("ws://sqrx-rbi.%s.svc.cluster.local:%s/%s/ws",
-			containerID, SqrxRBIBoxPort, containerID)
+		targetURL = fmt.Sprintf("ws://rbix-rbi.%s.svc.cluster.local:%s/%s/ws",
+			containerID, RbiXRBIBoxPort, containerID)
 	}
 
 	remote, _ := url.Parse(targetURL)
@@ -76,7 +76,7 @@ func angagoServer(w http.ResponseWriter, r *http.Request) {
 // angagoProxy Serve a reverse proxy for a given url
 func angagoProxy(w http.ResponseWriter, r *http.Request, remote *url.URL) {
 	// prepare remote(target) websocket connection
-	// this is act as client connextion(sqrx-proxy) to the remote server(sqrx-rbi-box)
+	// this is act as client connextion(rbix-proxy) to the remote server(rbix-rbi-box)
 	remoteWSConn, resp, err := defaultDialer.Dial(remote.String(), remoteReqHeaders(r))
 	if err != nil {
 		log.Printf("couldn't dial to remote backend url %s", err)
@@ -93,7 +93,7 @@ func angagoProxy(w http.ResponseWriter, r *http.Request, remote *url.URL) {
 	defer remoteWSConn.Close()
 
 	// upgrade client websocket connection
-	// this is act as server connection(sqrx-proxy) to the client(sqrx-client)
+	// this is act as server connection(rbix-proxy) to the client(rbix-client)
 	clientWSConn, err := defaultUpgrader.Upgrade(w, r, clientReqHeaders(resp))
 	if err != nil {
 		log.Printf("websocketproxy: couldn't upgrade %s", err)
@@ -203,7 +203,7 @@ func copyResponse(rw http.ResponseWriter, resp *http.Response) error {
 func angagoServerHttp(w http.ResponseWriter, r *http.Request) {
 	containerID := chi.URLParam(r, "container_id")
 
-	target := fmt.Sprintf("http://%s:%s/%s/ws", containerID, SqrxRBIBoxPort, containerID)
+	target := fmt.Sprintf("http://%s:%s/%s/ws", containerID, RbiXRBIBoxPort, containerID)
 	resp, err := http.Get(target)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

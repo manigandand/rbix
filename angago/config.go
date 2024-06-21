@@ -22,11 +22,11 @@ var (
 	// Port is the port number to listen on
 	Port = "8081"
 
-	// SqrxRBIBoxPort is the post container exposing the SqrxRBIBox websocket
-	SqrxRBIBoxPort = "8888"
+	// RbiXRBIBoxPort is the post container exposing the RbiXRBIBox websocket
+	RbiXRBIBoxPort = "8888"
 
-	// SqrxAPIServer is the server name of the SqrxRBIBox container
-	SqrxAPIServer = "http://localhost:8080"
+	// RbiXAPIServer is the server name of the RbiXRBIBox container
+	RbiXAPIServer = "http://localhost:8080"
 )
 
 // Initialize initializes all the env variables for this package.
@@ -47,8 +47,8 @@ func Initialize(files ...string) {
 
 	addNewEnvEntry("ENV", &Env, Env)
 	addNewEnvEntry("PORT", &Port, Port)
-	addNewEnvEntry("SQRX_RBI_BOX_PORT", &SqrxRBIBoxPort, SqrxRBIBoxPort)
-	addNewEnvEntry("SQRX_API_SERVER_HOST", &SqrxAPIServer, SqrxAPIServer)
+	addNewEnvEntry("RBIX_RBI_BOX_PORT", &RbiXRBIBoxPort, RbiXRBIBoxPort)
+	addNewEnvEntry("RBIX_API_SERVER_HOST", &RbiXAPIServer, RbiXAPIServer)
 
 	// load all the env variables. Must be called at the end.
 	load()

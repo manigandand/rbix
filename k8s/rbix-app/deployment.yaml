@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sqrx-app
+  name: rbix-app
   namespace: platform
 spec:
   selector:
     matchLabels:
-      run: sqrx-app
+      run: rbix-app
   replicas: 1
   template:
     metadata:
       labels:
-        run: sqrx-app
+        run: rbix-app
     spec:
       containers:
-        - name: sqrx-app
-          image: manigandanjeff/sqrx-app:latest
+        - name: rbix-app
+          image: manigandanjeff/rbix-app:latest
           ports:
             - containerPort: 3000
           resources:

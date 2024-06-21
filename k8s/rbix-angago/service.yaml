@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sqrx-angago
+  name: rbix-angago
   namespace: platform
   labels:
-    run: sqrx-angago
+    run: rbix-angago
 spec:
   type: NodePort
   ports:
@@ -13,26 +13,26 @@ spec:
     targetPort: 8081
     protocol: TCP
   selector:
-    run: sqrx-angago
+    run: rbix-angago
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sqrx-angago-gateway
+  name: rbix-angago-gateway
   namespace: platform
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   labels:
-    name: sqrx-angago-gateway
+    name: rbix-angago-gateway
 spec:
   rules:
-  - host: in.malwareriplabs.sqrx.com
+  - host: in.malwaresamathi.rbixlabs.com
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: sqrx-angago
+            name: rbix-angago
             port:
               number: 8081

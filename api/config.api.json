@@ -1,6 +1,6 @@
 {
 	"ENV": "dev-docker",
 	"PORT": "8080",
-	"SQRX_WS_LOADBALANCER_HOST": "localhost:8081",
-	"SQRX_RBI_IMAGE": "manigandanjeff/sqrx-rbi:latest"
+	"RBIX_WS_LOADBALANCER_HOST": "localhost:8081",
+	"RBIX_RBI_IMAGE": "manigandanjeff/rbix-rbi:latest"
 }

@@ -1,43 +1,43 @@
 #!/bin/sh
 
 # build binary and docker images
-# sqrx-api
-echo "======= Building sqrx-api =======>"
+# rbix-api
+echo "======= Building rbix-api =======>"
 cd api
-CGO_ENABLED=0 GOOS=linux go build -o sqrx-api -ldflags "-w -s"
+CGO_ENABLED=0 GOOS=linux go build -o rbix-api -ldflags "-w -s"
 
-# sqrx-angago
-echo "======= Building sqrx-angago =======>"
+# rbix-angago
+echo "======= Building rbix-angago =======>"
 cd ../angago
 
-CGO_ENABLED=0 GOOS=linux go build -o sqrx-angago -ldflags "-w -s"
+CGO_ENABLED=0 GOOS=linux go build -o rbix-angago -ldflags "-w -s"
 
-docker build -t manigandanjeff/sqrx-angago:latest .
+docker build -t manigandanjeff/rbix-angago:latest .
 
-# sqrx-rbi
-echo "======= Building sqrx-rbi =======>"
+# rbix-rbi
+echo "======= Building rbix-rbi =======>"
 cd ../rbi
 
-CGO_ENABLED=0 GOOS=linux go build -o sqrx-rbi -ldflags "-w -s"
+CGO_ENABLED=0 GOOS=linux go build -o rbix-rbi -ldflags "-w -s"
 
-docker build -t manigandanjeff/sqrx-rbi:latest .
+docker build -t manigandanjeff/rbix-rbi:latest .
 
 # create a docker network
 echo "======= Creating docker network =======>"
-docker network create sqrx-network
+docker network create rbix-network
 
 cd ..
 
-# run sqrx-angago
-echo "======= Running sqrx-angago docker container =======>"
+# run rbix-angago
+echo "======= Running rbix-angago docker container =======>"
 docker run --rm -d -p 8081:8081 \
     -v /angago/config.angago.json:/mnt/config/config.angago.json \
-    --network sqrx-network \
-    --name box-sqrx-angago-1 \
-    --hostname box-sqrx-angago \
-    manigandanjeff/sqrx-angago:latest
+    --network rbix-network \
+    --name box-rbix-angago-1 \
+    --hostname box-rbix-angago \
+    manigandanjeff/rbix-angago:latest
 
-# run sqrx-api
-echo "======= Running sqrx-api docker container =======>"
+# run rbix-api
+echo "======= Running rbix-api docker container =======>"
 cd api
-./sqrx-api config.api.json
+./rbix-api config.api.json

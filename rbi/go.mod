@@ -1,4 +1,4 @@
-module sqrx/rbi
+module rbix/rbi
 
 go 1.18
 

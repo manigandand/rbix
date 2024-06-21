@@ -8,26 +8,26 @@ minikube addons enable ingress-dns
 kubectl create clusterrolebinding default-view --clusterrole=view --serviceaccount=default:default
 
 # create a namespace `platform`
-kubectl apply -f k8s/namespace/sqrx-ns-platform.yaml
+kubectl apply -f k8s/namespace/rbix-ns-platform.yaml
 
 # mount the configmaps
 kubectl apply -f k8s/configmap/config.yaml
 
 # update local dns /etc/hosts
 minikube ip
-echo "$(minikube ip) app.sqrx.com api.sqrx.com in.malwareriplabs.sqrx.com" | sudo tee -a /etc/hosts
+echo "$(minikube ip) app.rbixlabs.com api.rbixlabs.com in.malwaresamathi.rbixlabs.com" | sudo tee -a /etc/hosts
 
-# deploy sqrx-app
-kubectl apply -f k8s/sqrx-app/deployment.yaml
-kubectl apply -f k8s/sqrx-app/service.yaml
+# deploy rbix-app
+kubectl apply -f k8s/rbix-app/deployment.yaml
+kubectl apply -f k8s/rbix-app/service.yaml
 
-# deploy sqrx-api
-kubectl apply -f k8s/sqrx-api/deployment.yaml
-kubectl apply -f k8s/sqrx-api/service.yaml
+# deploy rbix-api
+kubectl apply -f k8s/rbix-api/deployment.yaml
+kubectl apply -f k8s/rbix-api/service.yaml
 
-# deploy sqrx-angago
-kubectl apply -f k8s/sqrx-angago/deployment.yaml
-kubectl apply -f k8s/sqrx-angago/service.yaml
+# deploy rbix-angago
+kubectl apply -f k8s/rbix-angago/deployment.yaml
+kubectl apply -f k8s/rbix-angago/service.yaml
 
 # after deployment, create a role binding for the service account
 kubectl create clusterrolebinding ns:platform-u:default-r:cluster-admin --clusterrole=cluster-admin --serviceaccount=platform:default

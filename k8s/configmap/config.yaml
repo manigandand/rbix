@@ -1,22 +1,22 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-    name: sqrx-config
+    name: rbix-config
     namespace: platform
 data:
     config.api.json: |
         {
           "ENV": "dev-k8s",
           "PORT": "8080",
-          "SQRX_WS_LOADBALANCER_HOST" : "in.malwareriplabs.sqrx.com",
-          "SQRX_RBI_IMAGE": "manigandanjeff/sqrx-rbi:latest"
+          "RBIX_WS_LOADBALANCER_HOST" : "in.malwaresamathi.rbixlabs.com",
+          "RBIX_RBI_IMAGE": "manigandanjeff/rbix-rbi:latest"
         }
     config.angago.json: |
         {
           "ENV": "dev-k8s",
           "PORT": "8081",
-          "SQRX_RBI_BOX_PORT" : "8888",
-          "SQRX_API_SERVER_HOST": "http://api.sqrx.com"
+          "RBIX_RBI_BOX_PORT" : "8888",
+          "RBIX_API_SERVER_HOST": "http://api.rbixlabs.com"
         }
     config.rbi.json: |
         {

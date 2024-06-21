@@ -116,8 +116,8 @@ func main() {
 
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool {
-		// Allow connections from sqrx-angago container only
-		// if r.Host != "sqrx-angago" {
+		// Allow connections from rbix-angago container only
+		// if r.Host != "rbix-angago" {
 		// 	return false
 		// }
 		return true

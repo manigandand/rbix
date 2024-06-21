@@ -1,4 +1,4 @@
-module sqrx/api
+module rbix/api
 
 go 1.19
 

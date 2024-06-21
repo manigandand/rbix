@@ -14,9 +14,9 @@ import (
 )
 
 type docker struct {
-	// Sqrx cluster network bridge
+	// RbiX cluster network bridge
 	// we expect that the network is already created
-	sqrxNetwork types.NetworkResource
+	rbixNetwork types.NetworkResource
 }
 
 // NewDockerOrchestrator - create new docker orchestrator
@@ -28,7 +28,7 @@ func NewDockerOrchestrator() (Orchestrator, *errors.AppError) {
 	}
 	defer cli.Close()
 
-	// fetch sqrx-network
+	// fetch rbix-network
 	netw, err := cli.NetworkList(ctx, types.NetworkListOptions{})
 	if err != nil {
 		return nil, errors.InternalServer("could not get network list: " + err.Error())
@@ -41,21 +41,21 @@ func NewDockerOrchestrator() (Orchestrator, *errors.AppError) {
 
 	found := false
 	for _, n := range netw {
-		if n.Name == "sqrx-network" {
-			doc.sqrxNetwork = n
+		if n.Name == "rbix-network" {
+			doc.rbixNetwork = n
 			found = true
 			break
 		}
 	}
 
 	if !found {
-		return nil, errors.InternalServer("sqrx-network not found")
+		return nil, errors.InternalServer("rbix-network not found")
 	}
 
 	return doc, nil
 }
 
-// StartRBIInstance - start new sqrx-rbi instance
+// StartRBIInstance - start new rbix-rbi instance
 func (d *docker) StartRBIInstance(ctx context.Context, containerUniqeID string,
 ) (*ContainerInfo, *errors.AppError) {
 	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
@@ -69,7 +69,7 @@ func (d *docker) StartRBIInstance(ctx context.Context, containerUniqeID string,
 	}
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
-		Image:    SqrxRbiImage,
+		Image:    RbiXRbiImage,
 		Hostname: containerUniqeID,
 		Env: []string{
 			"CONTAINER_ID=" + containerUniqeID,
@@ -88,12 +88,12 @@ func (d *docker) StartRBIInstance(ctx context.Context, containerUniqeID string,
 	containerInfo.StartedAt = time.Now()
 
 	// connect container to the network
-	if err := cli.NetworkConnect(ctx, d.sqrxNetwork.ID, resp.ID, nil); err != nil {
+	if err := cli.NetworkConnect(ctx, d.rbixNetwork.ID, resp.ID, nil); err != nil {
 		return nil, errors.InternalServer("could not connect container to network: " + err.Error())
 	}
 	containerInfo.DocContainer = resp
 	containerInfo.ValidTill = time.Now().Add(10 * time.Minute)
-	containerInfo.Session = fmt.Sprintf("%s/%s/ws", SqrxWSLoadbalncerHost, containerUniqeID)
+	containerInfo.Session = fmt.Sprintf("%s/%s/ws", RbiXWSLoadbalncerHost, containerUniqeID)
 	containerInfo.TerminationToken = uuid.New().String()
 
 	// save to db
@@ -111,7 +111,7 @@ func (d *docker) StartRBIInstance(ctx context.Context, containerUniqeID string,
 	return containerInfo, nil
 }
 
-// DestroyRBIInstance - destroy sqrx-rbi instance
+// DestroyRBIInstance - destroy rbix-rbi instance
 func (d *docker) DestroyRBIInstance(ctx context.Context, terminationToken string) *errors.AppError {
 	cInfo, err := db.GetContainerInfoByTermToken(terminationToken)
 	if err.NotNil() {

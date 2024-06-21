@@ -6,23 +6,23 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 
 ## Kubernetes deployment architecture
 
-![squarex-k8s](/asset/sqrx-archi-k8s.jpg)
+![rbix-k8s](/asset/rbix-archi-k8s.jpg)
 
 ---
 
 ## Docker deployment architecture
 
-![squarex](/asset/sqrx-archi-docker.jpg)
+![rbix](/asset/rbix-archi-docker.jpg)
 
 ---
 
 > Demo video
 
-![squarex-app](/web/static/img/app.sqrx.com.png)
+![rbix-app](/web/static/img/app.rbix.com.png)
 
 > NOTE: use `password` as password to access the container
 
-![squarex-app](/web/static/img/app.sqrx.session.png)
+![rbix-app](/web/static/img/app.rbix.session.png)
 
 ### How to run: via k8s minikube
 
@@ -39,7 +39,7 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 ### How to run: via docker containers
 
 ```bash
-- Will create a docker network `sqrx-network`
+- Will create a docker network `rbix-network`
 
 ./run.sh
 
@@ -47,20 +47,20 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 
 ---
 
-### sqrx-api-server
+### rbix-api-server
 
-- responsible for managing the containers and provisioning new sqrx-rbi containers.
+- responsible for managing the containers and provisioning new rbix-rbi containers.
 - expose few endpoints
 
   - /try endpoint to spin up a new container
   - /status/{container_id} endpoint to check status of a container (running or not)
   - /stop/{termination_token} endpoint to stop a container
 
-- Client, calls `POST http://api.sqrx.com/v1/try` -> sqrx-api-server now spins up a new container and returns the session_id and termination_token, also schedules background job to terminate the container after 10 mins.
+- Client, calls `POST http://api.rbixlabs.com/v1/try` -> rbix-api-server now spins up a new container and returns the session_id and termination_token, also schedules background job to terminate the container after 10 mins.
 
 ```json
 {
-	"session": "in.malwareriplabs.sqrx.com/dfv-4c1c34a5-4f1c-47ae-a812-e414f0fc41c9/ws",
+	"session": "in.malwaresamathi.rbixlabs.com/dfv-4c1c34a5-4f1c-47ae-a812-e414f0fc41c9/ws",
 	"termination_token": "728bd120-aeb8-4b88-bcde-941e386d0e39",
 	"created_at": "2023-07-02T23:20:28.957607349+05:30",
 	"started_at": "2023-07-02T23:20:29.154287117+05:30",
@@ -68,14 +68,14 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
 }
 ```
 
-### sqrx-angago
+### rbix-angago
 
 - it's a simple reverseproxy server, which will proxy the websocket connection to the specific container.
-- when client connects to reverseproxy `ws://in.malwareriplabs.sqrx.com/dfv-4c1c34a5-4f1c-47ae-a812-e414f0fc41c9/ws`,
-  it makes a downstream connection with the `sqrx-rbi` container and upgrade the client connection to websocket.
+- when client connects to reverseproxy `ws://in.malwaresamathi.rbixlabs.com/dfv-4c1c34a5-4f1c-47ae-a812-e414f0fc41c9/ws`,
+  it makes a downstream connection with the `rbix-rbi` container and upgrade the client connection to websocket.
 - upon successful connection, it will start streaming the message from the container to the client.
 
-### sqrx-rbi
+### rbix-rbi
 
 - simple websocket server, which will stream the message from the container to the client.
 - just expose the container information to the client.
@@ -96,11 +96,11 @@ Container Isolations- Websocket reverse proxy - Remote Browser Isolations
   - in 24 hours, (6*24)*65536 = 94,60,224 connections
 
 ```
-# create network for sqrx
-docker network create sqrx-network
+# create network for rbix
+docker network create rbix-network
 ```
 
-## sqrx-api-server
+## rbix-api-server
 
 - /v1/try endpoint to spin up a new container
 - /v1/status endpoint to check status of a container (running or not)
